@@ -1,0 +1,2883 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NumNum Bites | Small Bites, Big Joy – Healthy Sri Lankan Snacks</title>
+  <meta name="description" content="NumNum Bites - Delicious, natural and healthy Sri Lankan energy snacks made with kithul jaggery, peanuts, dates, and kurakkan. No added sugar or preservatives." />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Fredoka (playful rounded brand headings) & Plus Jakarta Sans (clean readable body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            choco: {
+              950: '#241108',
+              900: '#3B1E10',
+              800: '#4F2916',
+              700: '#6B3A20',
+              600: '#8C4E2B',
+            },
+            cream: {
+              50: '#FFFDF9',
+              100: '#FDF8F2',
+              200: '#F8EFE2',
+            },
+            beige: {
+              100: '#F3E8D8',
+              200: '#E7D5BC',
+              300: '#D6BC99',
+            },
+            gold: {
+              400: '#F0BC52',
+              500: '#E5A93C',
+              600: '#C88D24',
+            },
+            leaf: {
+              600: '#4A6B3E',
+              700: '#38542E',
+            }
+          },
+          fontFamily: {
+            display: ['Fredoka', 'cursive', 'sans-serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          boxShadow: {
+            'soft': '0 10px 30px -5px rgba(59, 30, 16, 0.08)',
+            'card': '0 12px 28px -6px rgba(59, 30, 16, 0.12)',
+            'float': '0 20px 40px -10px rgba(59, 30, 16, 0.22)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #FDF8F2;
+      color: #3B1E10;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .font-brand {
+      font-family: 'Fredoka', sans-serif;
+    }
+
+    /* Subtle organic paper/linen background texture */
+    .linen-bg {
+      background-color: #FDF8F2;
+      background-image: radial-gradient(rgba(59, 30, 16, 0.045) 1px, transparent 0);
+      background-size: 22px 22px;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F3E8D8;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #6B3A20;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3B1E10;
+    }
+
+    /* Floating animation for natural snack accents */
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-7px) rotate(2deg); }
+    }
+    .animate-float {
+      animation: floatSlow 4.5s ease-in-out infinite;
+    }
+
+    /* Smooth tab & section transitions */
+    .fade-in {
+      animation: fadeIn 0.35s ease-out forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Toast Notification */
+    #toast-container {
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body class="linen-bg min-h-screen flex flex-col selection:bg-gold-500 selection:text-choco-900">
+
+  <!-- ==================== NAVIGATION BAR ==================== -->
+  <header class="sticky top-0 z-40 bg-cream-100/95 backdrop-blur-md border-b border-beige-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <!-- Brand Logo -->
+        <a href="#home" onclick="navigateTo('home')" class="flex items-center gap-3 group focus:outline-none">
+          <div id="nav-logo-container" class="w-14 h-14 rounded-full overflow-hidden shadow-md border-2 border-beige-300 group-hover:scale-105 transition-transform bg-choco-900 flex items-center justify-center">
+            <!-- Dynamic Logo injected by JS -->
+          </div>
+          <div>
+            <span class="font-brand text-xl sm:text-2xl font-bold text-choco-900 tracking-tight block leading-none">NumNum Bites</span>
+            <span class="text-[11px] font-semibold uppercase tracking-widest text-choco-600 mt-0.5 block">Small Bites, Big Joy</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden lg:flex items-center gap-7">
+          <button onclick="navigateTo('home')" class="nav-link text-sm font-semibold text-choco-900 hover:text-gold-600 transition-colors py-1 border-b-2 border-gold-500" data-target="home">Home</button>
+          <button onclick="navigateTo('about')" class="nav-link text-sm font-semibold text-choco-700 hover:text-gold-600 transition-colors py-1 border-b-2 border-transparent" data-target="about">About Us</button>
+          <button onclick="navigateTo('products')" class="nav-link text-sm font-semibold text-choco-700 hover:text-gold-600 transition-colors py-1 border-b-2 border-transparent" data-target="products">Our Products</button>
+          <button onclick="navigateTo('how-to-order')" class="nav-link text-sm font-semibold text-choco-700 hover:text-gold-600 transition-colors py-1 border-b-2 border-transparent" data-target="how-to-order">How to Order</button>
+          <button onclick="navigateTo('contact')" class="nav-link text-sm font-semibold text-choco-700 hover:text-gold-600 transition-colors py-1 border-b-2 border-transparent" data-target="contact">Contact Us</button>
+        </nav>
+
+        <!-- Action Buttons: WhatsApp, Cart, Admin, Mobile Menu -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          <a id="nav-whatsapp-btn" href="https://wa.me/94782083633?text=Hello%20NumNum%20Bites!%20I%20would%20like%20to%20place%20an%20order." target="_blank" rel="noopener"
+             class="hidden sm:inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1fb858] text-white text-xs sm:text-sm font-bold px-3.5 py-2.5 rounded-full shadow-sm hover:shadow transition-all">
+            <i class="fa-brands fa-whatsapp text-base"></i>
+            <span>Order on WhatsApp</span>
+          </a>
+
+          <!-- Cart Button -->
+          <button onclick="toggleCart(true)" aria-label="Open Shopping Cart"
+                  class="relative p-2.5 sm:p-3 rounded-full bg-beige-100 hover:bg-beige-200 text-choco-900 transition-colors border border-beige-200">
+            <i class="fa-solid fa-basket-shopping text-lg"></i>
+            <span id="cart-badge" class="absolute -top-1 -right-1 bg-choco-900 text-gold-400 text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow">0</span>
+          </button>
+
+          <!-- Admin Dashboard Button -->
+          <button onclick="openAdminModal()" title="Admin Dashboard" aria-label="Admin Dashboard"
+                  class="p-2.5 sm:p-3 rounded-full bg-choco-900 hover:bg-choco-800 text-cream-100 transition-colors shadow-sm">
+            <i class="fa-solid fa-user-shield text-sm sm:text-base"></i>
+          </button>
+
+          <!-- Mobile Hamburger -->
+          <button onclick="toggleMobileMenu()" aria-label="Toggle Menu"
+                  class="lg:hidden p-2.5 rounded-xl bg-beige-100 text-choco-900 hover:bg-beige-200">
+            <i id="mobile-menu-icon" class="fa-solid fa-bars text-lg"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-cream-100 border-t border-beige-200 px-4 pt-3 pb-5 space-y-2 shadow-lg">
+      <button onclick="navigateTo('home'); toggleMobileMenu()" class="block w-full text-left px-4 py-2.5 rounded-xl font-semibold text-choco-900 hover:bg-beige-100">Home</button>
+      <button onclick="navigateTo('about'); toggleMobileMenu()" class="block w-full text-left px-4 py-2.5 rounded-xl font-semibold text-choco-900 hover:bg-beige-100">About Us</button>
+      <button onclick="navigateTo('products'); toggleMobileMenu()" class="block w-full text-left px-4 py-2.5 rounded-xl font-semibold text-choco-900 hover:bg-beige-100">Our Products</button>
+      <button onclick="navigateTo('how-to-order'); toggleMobileMenu()" class="block w-full text-left px-4 py-2.5 rounded-xl font-semibold text-choco-900 hover:bg-beige-100">How to Order</button>
+      <button onclick="navigateTo('contact'); toggleMobileMenu()" class="block w-full text-left px-4 py-2.5 rounded-xl font-semibold text-choco-900 hover:bg-beige-100">Contact Us</button>
+      <div class="pt-2 border-t border-beige-200 flex gap-2">
+        <a href="https://wa.me/94782083633?text=Hello%20NumNum%20Bites!" target="_blank" rel="noopener"
+           class="flex-1 flex items-center justify-center gap-2 bg-[#25D366] text-white font-bold py-2.5 rounded-full text-sm">
+          <i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp Order
+        </a>
+        <button onclick="toggleMobileMenu(); openAdminModal()" class="px-4 py-2.5 rounded-full bg-choco-900 text-cream-100 font-semibold text-sm">
+          <i class="fa-solid fa-lock mr-1"></i> Admin
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN CONTENT AREA ==================== -->
+  <main class="flex-grow">
+
+    <!-- ==================== 1. HOME SECTION ==================== -->
+    <section id="section-home" class="page-section fade-in">
+      <!-- Hero Banner (Inspired by Page 1 & Page 2 of PDF) -->
+      <div class="relative overflow-hidden bg-gradient-to-br from-cream-100 via-beige-100 to-beige-200/70 border-b border-beige-200">
+        <!-- Decorative Botanical / Natural Leaf Accents -->
+        <div class="absolute -top-10 -left-10 w-44 h-44 bg-gold-400/20 rounded-full blur-2xl pointer-events-none"></div>
+        <div class="absolute bottom-6 right-8 w-56 h-56 bg-leaf-600/10 rounded-full blur-2xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <!-- Hero Copy -->
+            <div class="lg:col-span-6 space-y-6 text-center lg:text-left">
+              <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-beige-300 shadow-sm text-xs font-bold uppercase tracking-wider text-choco-800">
+                <span class="w-2 h-2 rounded-full bg-leaf-600 animate-pulse"></span>
+                <span>100% Natural Sri Lankan Energy Snacks</span>
+              </div>
+
+              <h1 id="hero-heading" class="text-4xl sm:text-5xl lg:text-6xl font-bold text-choco-900 leading-[1.12]">
+                Healthy Bites, Happy Life!
+              </h1>
+
+              <p id="hero-subheading" class="text-base sm:text-lg text-choco-700 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                Discover delicious, natural and healthy snacks made with carefully selected ingredients.
+              </p>
+
+              <div class="inline-block bg-choco-900 text-gold-400 font-brand text-lg sm:text-xl px-5 py-2 rounded-2xl shadow-sm">
+                “<span id="hero-slogan">Small Bites, Big Joy.</span>”
+              </div>
+
+              <!-- CTA Buttons -->
+              <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                <button onclick="navigateTo('products')"
+                        class="w-full sm:w-auto px-8 py-4 rounded-full bg-choco-900 hover:bg-choco-800 text-cream-100 font-bold text-base shadow-float hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2.5">
+                  <span>Shop Now</span>
+                  <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+                <a id="hero-whatsapp-btn" href="https://wa.me/94782083633?text=Hello%20NumNum%20Bites!%20I'd%20like%20to%20order%20healthy%20snacks." target="_blank" rel="noopener"
+                   class="w-full sm:w-auto px-7 py-4 rounded-full bg-white hover:bg-beige-100 text-choco-900 border-2 border-choco-900 font-bold text-base shadow-soft hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2.5">
+                  <i class="fa-brands fa-whatsapp text-[#25D366] text-xl"></i>
+                  <span>Order via WhatsApp</span>
+                </a>
+              </div>
+
+              <!-- Trust Badges -->
+              <div class="grid grid-cols-3 gap-3 pt-4 max-w-md mx-auto lg:mx-0">
+                <div class="bg-white/80 backdrop-blur-sm p-3 rounded-2xl border border-beige-200 text-center">
+                  <div class="text-leaf-600 font-bold text-sm">No Added Sugar</div>
+                  <div class="text-[11px] text-choco-600">Pure Kithul & Dates</div>
+                </div>
+                <div class="bg-white/80 backdrop-blur-sm p-3 rounded-2xl border border-beige-200 text-center">
+                  <div class="text-leaf-600 font-bold text-sm">0% Preservatives</div>
+                  <div class="text-[11px] text-choco-600">Freshly Crafted</div>
+                </div>
+                <div class="bg-white/80 backdrop-blur-sm p-3 rounded-2xl border border-beige-200 text-center">
+                  <div class="text-leaf-600 font-bold text-sm">Real Energy</div>
+                  <div class="text-[11px] text-choco-600">Study, Work & Gym</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hero Photograph / Custom Craft Kraft Box Flatlay matching Page 2 of PDF -->
+            <div class="lg:col-span-6">
+              <div class="relative rounded-[2rem] overflow-hidden shadow-float border-4 border-white bg-beige-100 aspect-[16/11] group">
+                <div id="hero-image-wrapper" class="w-full h-full">
+                  <!-- Rendered dynamically with Page 2 Kraft Boxes + Dates + Ginger + Peanuts + Sesame SVG scene or Admin Uploaded Image -->
+                </div>
+                <!-- Floating Quality Tag -->
+                <div class="absolute bottom-4 left-4 right-4 sm:right-auto bg-white/95 backdrop-blur-md px-4 py-3 rounded-2xl shadow-lg border border-beige-200 flex items-center gap-3 animate-float">
+                  <div class="w-10 h-10 rounded-full bg-gold-500/20 text-choco-900 flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-seedling text-leaf-600 text-lg"></i>
+                  </div>
+                  <div>
+                    <p class="text-xs font-bold text-choco-900">Handcrafted in Sri Lanka</p>
+                    <p class="text-[11px] text-choco-600">Kithul Jaggery • Peanuts • Dates • Kurakkan</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Our Categories Strip (Inspired by Page 1 Reference) -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        <div class="text-center mb-10">
+          <span class="text-xs font-bold uppercase tracking-widest text-gold-600">Wholesome Varieties</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-choco-900 mt-1">Our Categories</h2>
+          <div class="w-20 h-1.5 bg-gold-500 rounded-full mx-auto mt-3"></div>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+          <button onclick="filterAndGoProducts('Danut')" class="group bg-white hover:bg-choco-900 p-5 rounded-3xl shadow-soft hover:shadow-card border border-beige-200 transition-all text-center">
+            <div class="w-20 h-20 mx-auto rounded-2xl bg-beige-100 group-hover:bg-choco-800 flex items-center justify-center mb-3 overflow-hidden p-1.5 transition-colors" id="cat-thumb-danut"></div>
+            <h3 class="font-brand font-bold text-base text-choco-900 group-hover:text-cream-100">Date & Peanut Balls</h3>
+            <p class="text-xs text-choco-600 group-hover:text-gold-400 mt-1">Danut (4 & 8 pcs)</p>
+          </button>
+
+          <button onclick="filterAndGoProducts('Kurakkan Laddu')" class="group bg-white hover:bg-choco-900 p-5 rounded-3xl shadow-soft hover:shadow-card border border-beige-200 transition-all text-center">
+            <div class="w-20 h-20 mx-auto rounded-2xl bg-beige-100 group-hover:bg-choco-800 flex items-center justify-center mb-3 overflow-hidden p-1.5 transition-colors" id="cat-thumb-kurakkan"></div>
+            <h3 class="font-brand font-bold text-base text-choco-900 group-hover:text-cream-100">Kurakkan Laddu</h3>
+            <p class="text-xs text-choco-600 group-hover:text-gold-400 mt-1">Nutty Finger Millet</p>
+          </button>
+
+          <button onclick="filterAndGoProducts('Hakuru-Inguru')" class="group bg-white hover:bg-choco-900 p-5 rounded-3xl shadow-soft hover:shadow-card border border-beige-200 transition-all text-center">
+            <div class="w-20 h-20 mx-auto rounded-2xl bg-beige-100 group-hover:bg-choco-800 flex items-center justify-center mb-3 overflow-hidden p-1.5 transition-colors" id="cat-thumb-hakuru"></div>
+            <h3 class="font-brand font-bold text-base text-choco-900 group-hover:text-cream-100">Hakuru-Inguru</h3>
+            <p class="text-xs text-choco-600 group-hover:text-gold-400 mt-1">Kithul Ginger Toffee</p>
+          </button>
+
+          <button onclick="filterAndGoProducts('Peanut Chikki')" class="group bg-white hover:bg-choco-900 p-5 rounded-3xl shadow-soft hover:shadow-card border border-beige-200 transition-all text-center">
+            <div class="w-20 h-20 mx-auto rounded-2xl bg-beige-100 group-hover:bg-choco-800 flex items-center justify-center mb-3 overflow-hidden p-1.5 transition-colors" id="cat-thumb-chikki"></div>
+            <h3 class="font-brand font-bold text-base text-choco-900 group-hover:text-cream-100">Peanut Chikki</h3>
+            <p class="text-xs text-choco-600 group-hover:text-gold-400 mt-1">Crunchy Sesame Bite</p>
+          </button>
+
+          <button onclick="filterAndGoProducts('Combo Boxes')" class="col-span-2 sm:col-span-1 group bg-white hover:bg-choco-900 p-5 rounded-3xl shadow-soft hover:shadow-card border border-beige-200 transition-all text-center">
+            <div class="w-20 h-20 mx-auto rounded-2xl bg-beige-100 group-hover:bg-choco-800 flex items-center justify-center mb-3 overflow-hidden p-1.5 transition-colors" id="cat-thumb-combo"></div>
+            <h3 class="font-brand font-bold text-base text-choco-900 group-hover:text-cream-100">Combo Boxes</h3>
+            <p class="text-xs text-choco-600 group-hover:text-gold-400 mt-1">Best of Both Worlds</p>
+          </button>
+        </div>
+      </div>
+
+      <!-- Popular Snacks Section -->
+      <div class="bg-beige-100/70 py-14 border-y border-beige-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-widest text-gold-600">Customer Favourites</span>
+              <h2 class="text-3xl sm:text-4xl font-bold text-choco-900 mt-1">Popular Snacks</h2>
+            </div>
+            <button onclick="navigateTo('products')" class="self-start sm:self-auto px-6 py-2.5 rounded-full bg-choco-900 hover:bg-choco-800 text-cream-100 text-sm font-bold transition-colors flex items-center gap-2">
+              <span>View All 12 Packs</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+
+          <div id="popular-products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Populated dynamically via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Special Offers Banner (Matches Page 1 Sample Design) -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        <div class="text-center mb-10">
+          <span class="text-xs font-bold uppercase tracking-widest text-gold-600">More Healthy Bites, More Savings!</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-choco-900 mt-1">Special Offers</h2>
+        </div>
+
+        <div id="special-offers-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Dynamically rendered from state so Admin can edit -->
+        </div>
+      </div>
+
+      <!-- Why Choose NumNum Bites? (6 Pillars) -->
+      <div class="bg-choco-900 text-cream-100 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="text-xs font-bold uppercase tracking-widest text-gold-400">The NumNum Promise</span>
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mt-1">Why Choose NumNum Bites?</h2>
+            <p class="text-beige-200 text-sm sm:text-base mt-3">Crafted with care by students at Wayamba University of Sri Lanka for everyday active living.</p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-choco-800/80 border border-choco-700 p-6 rounded-3xl hover:border-gold-500/60 transition-colors">
+              <div class="w-12 h-12 rounded-2xl bg-gold-500 text-choco-900 flex items-center justify-center text-xl font-bold mb-4">
+                <i class="fa-solid fa-leaf"></i>
+              </div>
+              <h3 class="font-brand text-xl font-bold text-white mb-2">1. Quality Ingredients</h3>
+              <p class="text-beige-200 text-sm leading-relaxed">We carefully select ingredients for our snacks — pure kithul jaggery, roasted peanuts, rich dates, and wholesome kurakkan.</p>
+            </div>
+
+            <div class="bg-choco-800/80 border border-choco-700 p-6 rounded-3xl hover:border-gold-500/60 transition-colors">
+              <div class="w-12 h-12 rounded-2xl bg-gold-500 text-choco-900 flex items-center justify-center text-xl font-bold mb-4">
+                <i class="fa-solid fa-heart-pulse"></i>
+              </div>
+              <h3 class="font-brand text-xl font-bold text-white mb-2">2. Healthy & Delicious</h3>
+              <p class="text-beige-200 text-sm leading-relaxed">Enjoy tasty snacks with a healthier touch — naturally sweet and filling with zero refined sugar.</p>
+            </div>
+
+            <div class="bg-choco-800/80 border border-choco-700 p-6 rounded-3xl hover:border-gold-500/60 transition-colors">
+              <div class="w-12 h-12 rounded-2xl bg-gold-500 text-choco-900 flex items-center justify-center text-xl font-bold mb-4">
+                <i class="fa-solid fa-sparkles"></i>
+              </div>
+              <h3 class="font-brand text-xl font-bold text-white mb-2">3. Freshness Matters</h3>
+              <p class="text-beige-200 text-sm leading-relaxed">We focus on delivering fresh, quality products packed in eco-friendly kraft boxes to lock in crunch and aroma.</p>
+            </div>
+
+            <div class="bg-choco-800/80 border border-choco-700 p-6 rounded-3xl hover:border-gold-500/60 transition-colors">
+              <div class="w-12 h-12 rounded-2xl bg-gold-500 text-choco-900 flex items-center justify-center text-xl font-bold mb-4">
+                <i class="fa-solid fa-tags"></i>
+              </div>
+              <h3 class="font-brand text-xl font-bold text-white mb-2">4. Affordable Prices</h3>
+              <p class="text-beige-200 text-sm leading-relaxed">Enjoy your favourite snacks at reasonable student- and family-friendly Sri Lankan Rupee prices.</p>
+            </div>
+
+            <div class="bg-choco-800/80 border border-choco-700 p-6 rounded-3xl hover:border-gold-500/60 transition-colors">
+              <div class="w-12 h-12 rounded-2xl bg-gold-500 text-choco-900 flex items-center justify-center text-xl font-bold mb-4">
+                <i class="fa-brands fa-whatsapp"></i>
+              </div>
+              <h3 class="font-brand text-xl font-bold text-white mb-2">5. Convenient Ordering</h3>
+              <p class="text-beige-200 text-sm leading-relaxed">Easily place your orders through WhatsApp in seconds directly from our website cart.</p>
+            </div>
+
+            <div class="bg-choco-800/80 border border-choco-700 p-6 rounded-3xl hover:border-gold-500/60 transition-colors">
+              <div class="w-12 h-12 rounded-2xl bg-gold-500 text-choco-900 flex items-center justify-center text-xl font-bold mb-4">
+                <i class="fa-solid fa-face-smile-beam"></i>
+              </div>
+              <h3 class="font-brand text-xl font-bold text-white mb-2">6. Customer Satisfaction</h3>
+              <p class="text-beige-200 text-sm leading-relaxed">Your happiness and satisfaction are our priority with every single bite you take.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Customer Reviews Section -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="text-center mb-12">
+          <span class="text-xs font-bold uppercase tracking-widest text-gold-600">Real People. Real Happiness.</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-choco-900 mt-1">Customer Reviews</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-white p-7 rounded-3xl shadow-soft border border-beige-200 flex flex-col justify-between">
+            <div>
+              <div class="flex text-gold-500 mb-3 text-sm gap-1">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <p class="text-choco-800 text-sm sm:text-base italic leading-relaxed">“Delicious and so healthy! Danut balls are my go-to lecture snack now—keeps me full without any sugar crash.”</p>
+            </div>
+            <div class="flex items-center gap-3 mt-6 pt-4 border-t border-beige-100">
+              <div class="w-10 h-10 rounded-full bg-choco-900 text-gold-400 font-bold flex items-center justify-center">RP</div>
+              <div>
+                <h4 class="font-bold text-sm text-choco-900">Rashmi Perera</h4>
+                <span class="text-xs text-choco-600">University Student</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white p-7 rounded-3xl shadow-soft border border-beige-200 flex flex-col justify-between">
+            <div>
+              <div class="flex text-gold-500 mb-3 text-sm gap-1">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <p class="text-choco-800 text-sm sm:text-base italic leading-relaxed">“Great quality and amazing taste! The Hakuru-Inguru toffee has authentic Sri Lankan kithul flavor with a warm ginger kick.”</p>
+            </div>
+            <div class="flex items-center gap-3 mt-6 pt-4 border-t border-beige-100">
+              <div class="w-10 h-10 rounded-full bg-choco-900 text-gold-400 font-bold flex items-center justify-center">DS</div>
+              <div>
+                <h4 class="font-bold text-sm text-choco-900">Dinuka Silva</h4>
+                <span class="text-xs text-choco-600">Software Engineer</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white p-7 rounded-3xl shadow-soft border border-beige-200 flex flex-col justify-between">
+            <div>
+              <div class="flex text-gold-500 mb-3 text-sm gap-1">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <p class="text-choco-800 text-sm sm:text-base italic leading-relaxed">“Perfect pre-workout snack for my gym routine. Combo Box 1 gives both energy balls and crunchy peanut chikki!”</p>
+            </div>
+            <div class="flex items-center gap-3 mt-6 pt-4 border-t border-beige-100">
+              <div class="w-10 h-10 rounded-full bg-choco-900 text-gold-400 font-bold flex items-center justify-center">KJ</div>
+              <div>
+                <h4 class="font-bold text-sm text-choco-900">Kavindi Jayasinghe</h4>
+                <span class="text-xs text-choco-600">Fitness Enthusiast</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 2. ABOUT US SECTION ==================== -->
+    <section id="section-about" class="page-section hidden fade-in py-12 md:py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <span class="text-xs font-bold uppercase tracking-widest text-gold-600">Who We Are</span>
+          <h1 class="text-3xl sm:text-5xl font-bold text-choco-900 mt-1">Our Story & Purpose</h1>
+          <p class="text-choco-700 mt-3 text-base sm:text-lg">Born at Wayamba University of Sri Lanka with a mission to replace sugary junk snacks with real, natural energy.</p>
+        </div>
+
+        <!-- Story Split Card -->
+        <div class="bg-white rounded-[2rem] shadow-card border border-beige-200 overflow-hidden mb-12">
+          <div class="grid grid-cols-1 lg:grid-cols-12">
+            <div class="lg:col-span-5 bg-beige-100 p-6 sm:p-8 flex items-center justify-center">
+              <div id="about-image-wrapper" class="w-full aspect-square rounded-3xl overflow-hidden shadow-md border-4 border-white">
+                <!-- Rendered dynamically or replaced by Admin -->
+              </div>
+            </div>
+            <div class="lg:col-span-7 p-8 sm:p-12 flex flex-col justify-center space-y-5">
+              <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-leaf-600 bg-leaf-600/10 px-3.5 py-1.5 rounded-full w-fit">
+                <i class="fa-solid fa-graduation-cap"></i> Founded in 2026 • Wayamba University of Sri Lanka
+              </div>
+              <h2 class="text-2xl sm:text-3xl font-bold text-choco-900">From University Trials to Sri Lanka’s Favourite Healthy Bite</h2>
+              <p id="about-story-text" class="text-choco-700 leading-relaxed text-sm sm:text-base">
+                Num-num bites was started in 2026 by a group of students in Wayamba University of Sri Lanka who loved snacking but wanted a healthier option. We noticed that most students, office workers and gym-goers were eating chips, biscuits and sugary drinks to get quick energy. But after a short time, they felt more tired and unhealthy. So, we decided to create a snack that is tasty, healthy and gives real energy.
+              </p>
+              <p class="text-choco-700 leading-relaxed text-sm sm:text-base">
+                After many trials with natural ingredients like kittul jaggery, peanuts, dates and oats, we created Num-num bites, a healthy snack that gives you long-lasting energy without added sugar or preservatives. Today, Num-num bites is made for everyone who wants to stay active, focused and healthy at university, at work, or at the gym.
+              </p>
+              <div class="pt-2 flex flex-wrap gap-2">
+                <span class="px-3.5 py-1.5 rounded-full bg-beige-100 text-choco-900 text-xs font-bold">🌴 Pure Kithul Jaggery</span>
+                <span class="px-3.5 py-1.5 rounded-full bg-beige-100 text-choco-900 text-xs font-bold">🥜 Roasted Peanuts</span>
+                <span class="px-3.5 py-1.5 rounded-full bg-beige-100 text-choco-900 text-xs font-bold">🌴 Sweet Dates</span>
+                <span class="px-3.5 py-1.5 rounded-full bg-beige-100 text-choco-900 text-xs font-bold">🌾 Nutty Kurakkan & Oats</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vision & Mission Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-14">
+          <div class="bg-choco-900 text-cream-100 p-8 sm:p-10 rounded-[2rem] shadow-card relative overflow-hidden">
+            <div class="w-14 h-14 rounded-2xl bg-gold-500 text-choco-900 flex items-center justify-center text-2xl mb-5">
+              <i class="fa-solid fa-eye"></i>
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-bold text-white mb-3">Our Vision</h3>
+            <p id="about-vision-text" class="text-beige-100 text-base leading-relaxed">
+              To become Sri Lanka's most trusted and loved healthy snack brand, helping people live an active and healthy life every day.
+            </p>
+          </div>
+
+          <div class="bg-beige-100 text-choco-900 p-8 sm:p-10 rounded-[2rem] shadow-soft border border-beige-300 relative overflow-hidden">
+            <div class="w-14 h-14 rounded-2xl bg-choco-900 text-gold-400 flex items-center justify-center text-2xl mb-5">
+              <i class="fa-solid fa-bullseye"></i>
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-bold text-choco-900 mb-3">Our Mission</h3>
+            <p id="about-mission-text" class="text-choco-800 text-base leading-relaxed">
+              To provide healthy, tasty and affordable energy snacks made from natural ingredients, without added sugar or harmful preservatives, for students, workers and fitness lovers across Sri Lanka.
+            </p>
+          </div>
+        </div>
+
+        <!-- 6 Reasons Grid -->
+        <div class="bg-white rounded-[2rem] p-8 sm:p-10 border border-beige-200 shadow-soft">
+          <h3 class="text-2xl sm:text-3xl font-bold text-choco-900 text-center mb-8">Why Choose NumNum Bites?</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="p-5 rounded-2xl bg-cream-100 border border-beige-200">
+              <span class="text-gold-600 font-brand font-bold text-lg">01. Quality Ingredients</span>
+              <p class="text-sm text-choco-700 mt-1">We carefully select ingredients for our snacks.</p>
+            </div>
+            <div class="p-5 rounded-2xl bg-cream-100 border border-beige-200">
+              <span class="text-gold-600 font-brand font-bold text-lg">02. Healthy & Delicious</span>
+              <p class="text-sm text-choco-700 mt-1">Enjoy tasty snacks with a healthier touch.</p>
+            </div>
+            <div class="p-5 rounded-2xl bg-cream-100 border border-beige-200">
+              <span class="text-gold-600 font-brand font-bold text-lg">03. Freshness Matters</span>
+              <p class="text-sm text-choco-700 mt-1">We focus on delivering fresh, quality products.</p>
+            </div>
+            <div class="p-5 rounded-2xl bg-cream-100 border border-beige-200">
+              <span class="text-gold-600 font-brand font-bold text-lg">04. Affordable Prices</span>
+              <p class="text-sm text-choco-700 mt-1">Enjoy your favourite snacks at reasonable prices.</p>
+            </div>
+            <div class="p-5 rounded-2xl bg-cream-100 border border-beige-200">
+              <span class="text-gold-600 font-brand font-bold text-lg">05. Convenient Ordering</span>
+              <p class="text-sm text-choco-700 mt-1">Easily place your orders through WhatsApp.</p>
+            </div>
+            <div class="p-5 rounded-2xl bg-cream-100 border border-beige-200">
+              <span class="text-gold-600 font-brand font-bold text-lg">06. Customer Satisfaction</span>
+              <p class="text-sm text-choco-700 mt-1">Your happiness and satisfaction are our priority.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 3. OUR PRODUCTS SECTION ==================== -->
+    <section id="section-products" class="page-section hidden fade-in py-12 md:py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <span class="text-xs font-bold uppercase tracking-widest text-gold-600">Fuel Your Day With Nature's Goodness</span>
+          <h1 class="text-3xl sm:text-5xl font-bold text-choco-900 mt-1">Our Products</h1>
+          <p class="text-choco-700 mt-2 text-sm sm:text-base">Hand-packed in eco-friendly kraft boxes. Select your pack size, add to cart, or order directly on WhatsApp.</p>
+        </div>
+
+        <!-- Search, Category Filter & Sort Toolbar -->
+        <div class="bg-white p-4 sm:p-5 rounded-3xl shadow-soft border border-beige-200 mb-8 space-y-4">
+          <div class="flex flex-col md:flex-row gap-4 justify-between">
+            <!-- Search Input -->
+            <div class="relative flex-grow max-w-md">
+              <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-choco-600"></i>
+              <input type="text" id="product-search" oninput="renderCatalogue()" placeholder="Search snacks (e.g., Danut, Kurakkan, Chikki, Combo)..."
+                     class="w-full pl-11 pr-4 py-3 rounded-2xl bg-cream-100 border border-beige-200 text-sm text-choco-900 focus:outline-none focus:border-choco-900" />
+            </div>
+
+            <!-- Sort Dropdown -->
+            <div class="flex items-center gap-3">
+              <label for="product-sort" class="text-xs font-bold uppercase tracking-wider text-choco-700 whitespace-nowrap">Sort by:</label>
+              <select id="product-sort" onchange="renderCatalogue()"
+                      class="px-4 py-3 rounded-2xl bg-cream-100 border border-beige-200 text-sm font-semibold text-choco-900 focus:outline-none focus:border-choco-900">
+                <option value="default">Featured Order</option>
+                <option value="price-asc">Price: Low to High (LKR)</option>
+                <option value="price-desc">Price: High to Low (LKR)</option>
+                <option value="name-asc">Name: A to Z</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Category Pills -->
+          <div id="category-filters" class="flex flex-wrap gap-2 pt-1">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+
+        <!-- Product Catalogue Grid -->
+        <div id="catalogue-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <!-- All 12+ products rendered dynamically -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="catalogue-empty" class="hidden text-center py-16 bg-white rounded-3xl border border-beige-200">
+          <i class="fa-solid fa-cookie-bite text-4xl text-beige-300 mb-3"></i>
+          <h3 class="font-brand text-xl font-bold text-choco-900">No matching snacks found</h3>
+          <p class="text-sm text-choco-600 mt-1">Try clearing your search or selecting "All Products".</p>
+          <button onclick="resetFilters()" class="mt-4 px-6 py-2.5 rounded-full bg-choco-900 text-cream-100 text-sm font-bold">Reset Filters</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 4. HOW TO ORDER & POLICIES SECTION ==================== -->
+    <section id="section-how-to-order" class="page-section hidden fade-in py-12 md:py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- How to Order Header -->
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <span class="text-xs font-bold uppercase tracking-widest text-gold-600">It's Quick & Easy!</span>
+          <h1 class="text-3xl sm:text-5xl font-bold text-choco-900 mt-1">How to Order</h1>
+          <p class="text-choco-700 mt-2">Five simple steps to get fresh NumNum Bites delivered right to your doorstep.</p>
+        </div>
+
+        <!-- 5-Step Flow with Icons & Connecting Arrows -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 relative mb-16">
+          <!-- Step 1 -->
+          <div class="bg-white p-6 rounded-3xl shadow-soft border border-beige-200 text-center relative group hover:-translate-y-1 transition-transform">
+            <div class="w-8 h-8 rounded-full bg-gold-500 text-choco-900 font-bold text-sm flex items-center justify-center mx-auto mb-3 shadow">1</div>
+            <div class="w-16 h-16 rounded-2xl bg-beige-100 text-choco-900 flex items-center justify-center text-2xl mx-auto mb-4 group-hover:bg-choco-900 group-hover:text-gold-400 transition-colors">
+              <i class="fa-solid fa-store"></i>
+            </div>
+            <h3 class="font-brand text-lg font-bold text-choco-900">Browse Products</h3>
+            <p class="text-xs text-choco-600 mt-2 leading-relaxed">Visit the website or WhatsApp catalogue to pick your snacks.</p>
+            <i class="hidden lg:block fa-solid fa-arrow-right-long text-gold-500 text-xl absolute -right-4 top-1/2 -translate-y-1/2 z-10"></i>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="bg-white p-6 rounded-3xl shadow-soft border border-beige-200 text-center relative group hover:-translate-y-1 transition-transform">
+            <div class="w-8 h-8 rounded-full bg-gold-500 text-choco-900 font-bold text-sm flex items-center justify-center mx-auto mb-3 shadow">2</div>
+            <div class="w-16 h-16 rounded-2xl bg-beige-100 text-choco-900 flex items-center justify-center text-2xl mx-auto mb-4 group-hover:bg-choco-900 group-hover:text-gold-400 transition-colors">
+              <i class="fa-brands fa-whatsapp"></i>
+            </div>
+            <h3 class="font-brand text-lg font-bold text-choco-900">Order via WhatsApp</h3>
+            <p class="text-xs text-choco-600 mt-2 leading-relaxed">Send product names and quantities via our official WhatsApp.</p>
+            <i class="hidden lg:block fa-solid fa-arrow-right-long text-gold-500 text-xl absolute -right-4 top-1/2 -translate-y-1/2 z-10"></i>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="bg-white p-6 rounded-3xl shadow-soft border border-beige-200 text-center relative group hover:-translate-y-1 transition-transform">
+            <div class="w-8 h-8 rounded-full bg-gold-500 text-choco-900 font-bold text-sm flex items-center justify-center mx-auto mb-3 shadow">3</div>
+            <div class="w-16 h-16 rounded-2xl bg-beige-100 text-choco-900 flex items-center justify-center text-2xl mx-auto mb-4 group-hover:bg-choco-900 group-hover:text-gold-400 transition-colors">
+              <i class="fa-solid fa-address-card"></i>
+            </div>
+            <h3 class="font-brand text-lg font-bold text-choco-900">Share Your Details</h3>
+            <p class="text-xs text-choco-600 mt-2 leading-relaxed">Provide your name, delivery address and phone number.</p>
+            <i class="hidden lg:block fa-solid fa-arrow-right-long text-gold-500 text-xl absolute -right-4 top-1/2 -translate-y-1/2 z-10"></i>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="bg-white p-6 rounded-3xl shadow-soft border border-beige-200 text-center relative group hover:-translate-y-1 transition-transform">
+            <div class="w-8 h-8 rounded-full bg-gold-500 text-choco-900 font-bold text-sm flex items-center justify-center mx-auto mb-3 shadow">4</div>
+            <div class="w-16 h-16 rounded-2xl bg-beige-100 text-choco-900 flex items-center justify-center text-2xl mx-auto mb-4 group-hover:bg-choco-900 group-hover:text-gold-400 transition-colors">
+              <i class="fa-solid fa-building-columns"></i>
+            </div>
+            <h3 class="font-brand text-lg font-bold text-choco-900">Make Payment</h3>
+            <p class="text-xs text-choco-600 mt-2 leading-relaxed">Make a bank deposit and send the payment slip on WhatsApp.</p>
+            <i class="hidden lg:block fa-solid fa-arrow-right-long text-gold-500 text-xl absolute -right-4 top-1/2 -translate-y-1/2 z-10"></i>
+          </div>
+
+          <!-- Step 5 -->
+          <div class="bg-white p-6 rounded-3xl shadow-soft border border-beige-200 text-center relative group hover:-translate-y-1 transition-transform">
+            <div class="w-8 h-8 rounded-full bg-gold-500 text-choco-900 font-bold text-sm flex items-center justify-center mx-auto mb-3 shadow">5</div>
+            <div class="w-16 h-16 rounded-2xl bg-beige-100 text-choco-900 flex items-center justify-center text-2xl mx-auto mb-4 group-hover:bg-choco-900 group-hover:text-gold-400 transition-colors">
+              <i class="fa-solid fa-box-open"></i>
+            </div>
+            <h3 class="font-brand text-lg font-bold text-choco-900">Get Your Order</h3>
+            <p class="text-xs text-choco-600 mt-2 leading-relaxed">Receive your freshly packed NumNum Bites order and enjoy!</p>
+          </div>
+        </div>
+
+        <!-- Store Policies (Terms & Conditions, Privacy Policy, Delivery Policy) -->
+        <div id="policies-anchor" class="bg-white rounded-[2rem] shadow-card border border-beige-200 p-6 sm:p-10">
+          <div class="text-center mb-8">
+            <span class="text-xs font-bold uppercase tracking-widest text-gold-600">Transparency & Care</span>
+            <h2 class="text-2xl sm:text-3xl font-bold text-choco-900 mt-1">Store Policies</h2>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Terms & Conditions -->
+            <div class="bg-cream-100 p-6 rounded-3xl border border-beige-200">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-xl bg-choco-900 text-gold-400 flex items-center justify-center">
+                  <i class="fa-solid fa-file-contract"></i>
+                </div>
+                <h3 class="font-brand text-xl font-bold text-choco-900">Terms & Conditions</h3>
+              </div>
+              <ul id="policy-terms-list" class="space-y-2.5 text-xs sm:text-sm text-choco-800">
+                <!-- Rendered dynamically -->
+              </ul>
+            </div>
+
+            <!-- Privacy Policy -->
+            <div class="bg-cream-100 p-6 rounded-3xl border border-beige-200">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-xl bg-choco-900 text-gold-400 flex items-center justify-center">
+                  <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h3 class="font-brand text-xl font-bold text-choco-900">Privacy Policy</h3>
+              </div>
+              <p class="text-xs font-semibold text-choco-700 mb-2">At NumNum Bites, we respect your privacy:</p>
+              <ul id="policy-privacy-list" class="space-y-2.5 text-xs sm:text-sm text-choco-800">
+                <!-- Rendered dynamically -->
+              </ul>
+            </div>
+
+            <!-- Delivery Policy -->
+            <div class="bg-cream-100 p-6 rounded-3xl border border-beige-200">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-xl bg-choco-900 text-gold-400 flex items-center justify-center">
+                  <i class="fa-solid fa-truck-fast"></i>
+                </div>
+                <h3 class="font-brand text-xl font-bold text-choco-900">Delivery Policy</h3>
+              </div>
+              <ul id="policy-delivery-list" class="space-y-2.5 text-xs sm:text-sm text-choco-800">
+                <!-- Rendered dynamically -->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 5. CONTACT US SECTION ==================== -->
+    <section id="section-contact" class="page-section hidden fade-in py-12 md:py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <span class="text-xs font-bold uppercase tracking-widest text-gold-600">We'd Love to Hear From You!</span>
+          <h1 class="text-3xl sm:text-5xl font-bold text-choco-900 mt-1">Contact Us</h1>
+          <p class="text-choco-700 mt-2">Have a question about bulk orders, campus delivery, or ingredients? Reach out anytime.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <!-- Contact Details & Socials -->
+          <div class="lg:col-span-5 space-y-6">
+            <div class="bg-choco-900 text-cream-100 p-8 rounded-[2rem] shadow-card space-y-6">
+              <h2 class="font-brand text-2xl font-bold text-white">Get in Touch</h2>
+
+              <div class="space-y-4">
+                <div class="flex items-start gap-4">
+                  <div class="w-11 h-11 rounded-2xl bg-choco-800 text-gold-400 flex items-center justify-center shrink-0">
+                    <i class="fa-solid fa-phone"></i>
+                  </div>
+                  <div>
+                    <span class="text-xs text-beige-300 block">Phone / WhatsApp</span>
+                    <span id="contact-phone-display" class="font-bold text-base text-white">+94 78 208 3633</span>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-4">
+                  <div class="w-11 h-11 rounded-2xl bg-choco-800 text-gold-400 flex items-center justify-center shrink-0">
+                    <i class="fa-solid fa-envelope"></i>
+                  </div>
+                  <div>
+                    <span class="text-xs text-beige-300 block">Email Address</span>
+                    <span id="contact-email-display" class="font-bold text-base text-white break-all">bsfnumnumbites@gmail.com</span>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-4">
+                  <div class="w-11 h-11 rounded-2xl bg-choco-800 text-gold-400 flex items-center justify-center shrink-0">
+                    <i class="fa-solid fa-location-dot"></i>
+                  </div>
+                  <div>
+                    <span class="text-xs text-beige-300 block">Origin</span>
+                    <span class="font-bold text-base text-white">Wayamba University of Sri Lanka</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Direct Action Buttons -->
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-2">
+                <a id="contact-call-btn" href="tel:+94782083633" class="flex items-center justify-center gap-2 py-3 px-3 rounded-xl bg-gold-500 hover:bg-gold-400 text-choco-900 font-bold text-xs transition-colors">
+                  <i class="fa-solid fa-phone-volume"></i> Call Now
+                </a>
+                <a id="contact-mail-btn" href="mailto:bsfnumnumbites@gmail.com" class="flex items-center justify-center gap-2 py-3 px-3 rounded-xl bg-choco-800 hover:bg-choco-700 text-white font-bold text-xs border border-choco-700 transition-colors">
+                  <i class="fa-solid fa-paper-plane"></i> Email Us
+                </a>
+                <a id="contact-wa-btn" href="https://wa.me/94782083633" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 py-3 px-3 rounded-xl bg-[#25D366] hover:bg-[#1fb858] text-white font-bold text-xs transition-colors">
+                  <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
+                </a>
+              </div>
+
+              <!-- Social Links -->
+              <div class="pt-4 border-t border-choco-800">
+                <span class="text-xs font-bold uppercase tracking-wider text-gold-400 block mb-3">Follow NumNum Bites</span>
+                <div class="grid grid-cols-2 gap-3" id="contact-socials-grid">
+                  <!-- Populated dynamically -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Contact Form -->
+          <div class="lg:col-span-7">
+            <div class="bg-white p-8 sm:p-10 rounded-[2rem] shadow-card border border-beige-200">
+              <h2 class="font-brand text-2xl font-bold text-choco-900 mb-2">Send Us a Message</h2>
+              <p class="text-sm text-choco-600 mb-6">Fill out the form below and we can also forward your inquiry straight to WhatsApp.</p>
+
+              <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-choco-800 mb-1.5">Your Name *</label>
+                    <input type="text" id="contact-name" required placeholder="e.g., Kasun Perera"
+                           class="w-full px-4 py-3 rounded-2xl bg-cream-100 border border-beige-200 text-sm focus:outline-none focus:border-choco-900" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-choco-800 mb-1.5">Phone / WhatsApp *</label>
+                    <input type="tel" id="contact-phone" required placeholder="e.g., 077 123 4567"
+                           class="w-full px-4 py-3 rounded-2xl bg-cream-100 border border-beige-200 text-sm focus:outline-none focus:border-choco-900" />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-choco-800 mb-1.5">Email Address</label>
+                  <input type="email" id="contact-email" placeholder="you@example.com"
+                         class="w-full px-4 py-3 rounded-2xl bg-cream-100 border border-beige-200 text-sm focus:outline-none focus:border-choco-900" />
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-choco-800 mb-1.5">Your Message *</label>
+                  <textarea id="contact-message" rows="4" required placeholder="Tell us what snacks you're interested in or ask any question..."
+                            class="w-full px-4 py-3 rounded-2xl bg-cream-100 border border-beige-200 text-sm focus:outline-none focus:border-choco-900"></textarea>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                  <button type="submit" class="flex-1 py-3.5 px-6 rounded-full bg-choco-900 hover:bg-choco-800 text-cream-100 font-bold text-sm shadow transition-all">
+                    <i class="fa-solid fa-paper-plane mr-2"></i> Send Message
+                  </button>
+                  <button type="button" onclick="sendContactViaWhatsApp()" class="py-3.5 px-6 rounded-full bg-[#25D366] hover:bg-[#1fb858] text-white font-bold text-sm shadow transition-all">
+                    <i class="fa-brands fa-whatsapp mr-2"></i> Send via WhatsApp
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 6. ADMIN DASHBOARD SECTION ==================== -->
+    <section id="section-admin" class="page-section hidden fade-in py-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Admin Top Bar -->
+        <div class="bg-choco-900 text-cream-100 p-6 rounded-3xl shadow-card mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-2xl bg-gold-500 text-choco-900 flex items-center justify-center text-xl font-bold">
+              <i class="fa-solid fa-sliders"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h1 class="font-brand text-2xl font-bold text-white">NumNum Bites Admin Dashboard</h1>
+                <span class="px-2.5 py-0.5 rounded-full bg-leaf-600 text-white text-[10px] font-bold uppercase">Live Sync</span>
+              </div>
+              <p class="text-xs text-beige-200">Manage products, upload real photographs, update prices, and customize site content.</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <button onclick="navigateTo('home')" class="px-4 py-2.5 rounded-xl bg-choco-800 hover:bg-choco-700 text-xs font-bold text-cream-100 border border-choco-700">
+              <i class="fa-solid fa-eye mr-1.5"></i> View Storefront
+            </button>
+            <button onclick="adminLogout()" class="px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-xs font-bold text-white">
+              <i class="fa-solid fa-right-from-bracket mr-1.5"></i> Logout
+            </button>
+          </div>
+        </div>
+
+        <!-- Overview Stats Cards -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <div class="bg-white p-5 rounded-3xl shadow-soft border border-beige-200">
+            <span class="text-xs font-bold uppercase text-choco-600">Total Products</span>
+            <div id="stat-total-products" class="font-brand text-3xl font-bold text-choco-900 mt-1">12</div>
+          </div>
+          <div class="bg-white p-5 rounded-3xl shadow-soft border border-beige-200">
+            <span class="text-xs font-bold uppercase text-choco-600">Categories</span>
+            <div id="stat-total-categories" class="font-brand text-3xl font-bold text-choco-900 mt-1">5</div>
+          </div>
+          <div class="bg-white p-5 rounded-3xl shadow-soft border border-beige-200">
+            <span class="text-xs font-bold uppercase text-choco-600">Available In Stock</span>
+            <div id="stat-available-products" class="font-brand text-3xl font-bold text-leaf-600 mt-1">12</div>
+          </div>
+          <div class="bg-white p-5 rounded-3xl shadow-soft border border-beige-200">
+            <span class="text-xs font-bold uppercase text-choco-600">Custom Uploaded Images</span>
+            <div id="stat-custom-images" class="font-brand text-3xl font-bold text-gold-600 mt-1">0</div>
+          </div>
+        </div>
+
+        <!-- Admin Navigation Tabs -->
+        <div class="flex flex-wrap gap-2 mb-6 bg-white p-2 rounded-2xl border border-beige-200 shadow-sm">
+          <button onclick="switchAdminTab('products')" class="admin-tab-btn px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-choco-900 text-cream-100" data-tab="products">
+            <i class="fa-solid fa-box mr-1.5"></i> Product Management
+          </button>
+          <button onclick="switchAdminTab('images')" class="admin-tab-btn px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-choco-800 hover:bg-beige-100" data-tab="images">
+            <i class="fa-solid fa-images mr-1.5"></i> Website Image Manager
+          </button>
+          <button onclick="switchAdminTab('content')" class="admin-tab-btn px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-choco-800 hover:bg-beige-100" data-tab="content">
+            <i class="fa-solid fa-pen-to-square mr-1.5"></i> Content, Offers & Policies
+          </button>
+          <button onclick="switchAdminTab('backend')" class="admin-tab-btn px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-choco-800 hover:bg-beige-100" data-tab="backend">
+            <i class="fa-solid fa-database mr-1.5"></i> Firebase / Storage & Activity
+          </button>
+        </div>
+
+        <!-- TAB 1: PRODUCT MANAGEMENT -->
+        <div id="admin-tab-products" class="admin-tab-panel space-y-6">
+          <div class="bg-white p-6 rounded-3xl shadow-soft border border-beige-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h2 class="font-brand text-xl font-bold text-choco-900">Catalogue Products & Combo Boxes</h2>
+              <p class="text-xs text-choco-600">Upload photos from your device, edit LKR prices, toggle stock status, or add new snacks.</p>
+            </div>
+            <button onclick="openProductEditorModal()" class="px-5 py-3 rounded-full bg-gold-500 hover:bg-gold-400 text-choco-900 font-bold text-xs sm:text-sm shadow">
+              <i class="fa-solid fa-plus mr-1.5"></i> Add New Product
+            </button>
+          </div>
+
+          <div id="admin-products-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <!-- Admin product cards rendered dynamically -->
+          </div>
+        </div>
+
+        <!-- TAB 2: WEBSITE IMAGE MANAGER -->
+        <div id="admin-tab-images" class="admin-tab-panel hidden space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Brand Logo Uploader -->
+            <div class="bg-white p-6 rounded-3xl shadow-soft border border-beige-200 flex flex-col justify-between">
+              <div>
+                <h3 class="font-brand text-lg font-bold text-choco-900 mb-1">Brand Logo</h3>
+                <p class="text-xs text-choco-600 mb-4">Displayed in the top navigation bar and footer.</p>
+                <div id="admin-preview-logo" class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-beige-200 bg-choco-900 mb-4 flex items-center justify-center"></div>
+              </div>
+              <div class="space-y-2">
+                <label class="block w-full text-center py-2.5 px-4 rounded-xl bg-choco-900 hover:bg-choco-800 text-cream-100 text-xs font-bold cursor-pointer">
+                  <i class="fa-solid fa-upload mr-1.5"></i> Upload New Logo
+                  <input type="file" accept="image/*" class="hidden" onchange="handleSiteImageUpload(event, 'logo')" />
+                </label>
+                <button onclick="resetSiteImage('logo')" class="w-full py-2 px-4 rounded-xl bg-beige-100 hover:bg-beige-200 text-choco-800 text-xs font-semibold">
+                  Restore Default Seal Logo
+                </button>
+              </div>
+            </div>
+
+            <!-- Homepage Hero Image Uploader -->
+            <div class="bg-white p-6 rounded-3xl shadow-soft border border-beige-200 flex flex-col justify-between">
+              <div>
+                <h3 class="font-brand text-lg font-bold text-choco-900 mb-1">Homepage Hero Photograph</h3>
+                <p class="text-xs text-choco-600 mb-4">Main showcase banner on the Home page.</p>
+                <div id="admin-preview-hero" class="w-full aspect-[16/10] rounded-2xl overflow-hidden border-2 border-beige-200 bg-beige-100 mb-4"></div>
+              </div>
+              <div class="space-y-2">
+                <label class="block w-full text-center py-2.5 px-4 rounded-xl bg-choco-900 hover:bg-choco-800 text-cream-100 text-xs font-bold cursor-pointer">
+                  <i class="fa-solid fa-upload mr-1.5"></i> Upload Hero Image
+                  <input type="file" accept="image/*" class="hidden" onchange="handleSiteImageUpload(event, 'hero')" />
+                </label>
+                <button onclick="resetSiteImage('hero')" class="w-full py-2 px-4 rounded-xl bg-beige-100 hover:bg-beige-200 text-choco-800 text-xs font-semibold">
+                  Restore Default Kraft Flatlay
+                </button>
+              </div>
+            </div>
+
+            <!-- About Us Image Uploader -->
+            <div class="bg-white p-6 rounded-3xl shadow-soft border border-beige-200 flex flex-col justify-between">
+              <div>
+                <h3 class="font-brand text-lg font-bold text-choco-900 mb-1">About Us Story Image</h3>
+                <p class="text-xs text-choco-600 mb-4">Displayed alongside the Wayamba University story.</p>
+                <div id="admin-preview-about" class="w-full aspect-[16/10] rounded-2xl overflow-hidden border-2 border-beige-200 bg-beige-100 mb-4"></div>
+              </div>
+              <div class="space-y-2">
+                <label class="block w-full text-center py-2.5 px-4 rounded-xl bg-choco-900 hover:bg-choco-800 text-cream-100 text-xs font-bold cursor-pointer">
+                  <i class="fa-solid fa-upload mr-1.5"></i> Upload About Image
+                  <input type="file" accept="image/*" class="hidden" onchange="handleSiteImageUpload(event, 'about')" />
+                </label>
+                <button onclick="resetSiteImage('about')" class="w-full py-2 px-4 rounded-xl bg-beige-100 hover:bg-beige-200 text-choco-800 text-xs font-semibold">
+                  Restore Default Ingredients Artwork
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: SITE CONTENT, OFFERS & POLICIES -->
+        <div id="admin-tab-content" class="admin-tab-panel hidden space-y-6">
+          <form onsubmit="saveSiteSettings(event)" class="bg-white p-6 sm:p-8 rounded-3xl shadow-soft border border-beige-200 space-y-6">
+            <h3 class="font-brand text-xl font-bold text-choco-900 border-b border-beige-200 pb-3">Homepage & Contact Information</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-choco-800 mb-1">Hero Main Heading</label>
+                <input type="text" id="edit-hero-heading" class="w-full px-4 py-2.5 rounded-xl bg-cream-100 border border-beige-200 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-choco-800 mb-1">Brand Slogan</label>
+                <input type="text" id="edit-hero-slogan" class="w-full px-4 py-2.5 rounded-xl bg-cream-100 border border-beige-200 text-sm" />
+              </div>
+              <div class="md:col-span-2">
+                <label class="block text-xs font-bold text-choco-800 mb-1">Hero Subheading</label>
+                <input type="text" id="edit-hero-subheading" class="w-full px-4 py-2.5 rounded-xl bg-cream-100 border border-beige-200 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-choco-800 mb-1">WhatsApp Number (digits with country code)</label>
+                <input type="text" id="edit-whatsapp-num" class="w-full px-4 py-2.5 rounded-xl bg-cream-100 border border-beige-200 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-choco-800 mb-1">Business Email</label>
+                <input type="email" id="edit-business-email" class="w-full px-4 py-2.5 rounded-xl bg-cream-100 border border-beige-200 text-sm" />
+              </div>
+            </div>
+
+            <h3 class="font-brand text-xl font-bold text-choco-900 border-b border-beige-200 pb-3 pt-2">Social Media URLs</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-choco-800 mb-1">Instagram URL</label>
+                <input type="url" id="edit-social-instagram" class="w-full px-4 py-2.5 rounded-xl bg-cream-100 border border-beige-200 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-choco-800 mb-1">Facebook URL</label>
+                <input type="url" id="edit-social-facebook" class="w-full px-4 py-2.5 rounded-xl bg-cream-100 border border-beige-200 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-choco-800 mb-1">YouTube URL</label>
+                <input type="url" id="edit-social-youtube" class="w-full px-4 py-2.5 rounded-xl bg-cream-100 border border-beige-200 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-choco-800 mb-1">TikTok URL</label>
+                <input type="url" id="edit-social-tiktok" class="w-full px-4 py-2.5 rounded-xl bg-cream-100 border border-beige-200 text-sm" />
+              </div>
+            </div>
+
+            <h3 class="font-brand text-xl font-bold text-choco-900 border-b border-beige-200 pb-3 pt-2">Special Offers Cards</h3>
+            <div id="admin-offers-editor" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <!-- Rendered dynamically -->
+            </div>
+
+            <div class="flex justify-end pt-3">
+              <button type="submit" class="px-8 py-3.5 rounded-full bg-choco-900 hover:bg-choco-800 text-cream-100 font-bold text-sm shadow">
+                <i class="fa-solid fa-floppy-disk mr-2"></i> Save All Site Settings
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- TAB 4: FIREBASE CLOUD CONFIG & ACTIVITY LOG -->
+        <div id="admin-tab-backend" class="admin-tab-panel hidden grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="bg-white p-6 rounded-3xl shadow-soft border border-beige-200 space-y-4">
+            <h3 class="font-brand text-xl font-bold text-choco-900">Firebase Cloud Backend Integration</h3>
+            <p class="text-xs text-choco-600 leading-relaxed">
+              Your changes currently persist automatically in your browser's local database (IndexedDB/LocalStorage). To sync across multiple devices with Firebase Authentication, Firestore, and Cloud Storage, paste your Firebase Web Config JSON below:
+            </p>
+            <textarea id="firebase-config-input" rows="6" placeholder='{"apiKey": "...", "authDomain": "...", "projectId": "...", "storageBucket": "..."}'
+                      class="w-full p-3.5 rounded-2xl bg-cream-100 border border-beige-200 font-mono text-xs focus:outline-none focus:border-choco-900"></textarea>
+            <div class="flex flex-wrap gap-3">
+              <button onclick="saveFirebaseConfig()" class="px-5 py-2.5 rounded-full bg-choco-900 text-cream-100 text-xs font-bold">
+                Connect Firebase Config
+              </button>
+              <button onclick="resetAllDemoData()" class="px-5 py-2.5 rounded-full bg-red-100 hover:bg-red-200 text-red-800 text-xs font-bold">
+                Reset All Data to Factory Defaults
+              </button>
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-3xl shadow-soft border border-beige-200">
+            <h3 class="font-brand text-xl font-bold text-choco-900 mb-3">Recent Admin Activity</h3>
+            <ul id="admin-activity-log" class="space-y-2.5 max-h-72 overflow-y-auto text-xs text-choco-700">
+              <!-- Populated dynamically -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER (Chocolate Brown Theme) ==================== -->
+  <footer class="bg-choco-950 text-cream-100 border-t border-choco-800 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <!-- Brand Column -->
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <div id="footer-logo-container" class="w-14 h-14 rounded-full overflow-hidden border-2 border-gold-500/50 bg-choco-900 flex items-center justify-center"></div>
+            <div>
+              <span class="font-brand text-2xl font-bold text-white block leading-none">NumNum Bites</span>
+              <span class="text-xs text-gold-400 font-semibold mt-1 block">Small Bites, Big Joy.</span>
+            </div>
+          </div>
+          <p class="text-xs text-beige-300 leading-relaxed">
+            Healthy, natural, and delicious Sri Lankan snacks made with pure kithul jaggery, roasted peanuts, dates, and kurakkan. No added sugar or preservatives.
+          </p>
+          <div id="footer-social-icons" class="flex items-center gap-3 pt-1">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="font-brand text-lg font-bold text-gold-400 mb-4">Quick Links</h4>
+          <ul class="space-y-2.5 text-sm text-beige-200">
+            <li><button onclick="navigateTo('home')" class="hover:text-gold-400 transition-colors">Home</button></li>
+            <li><button onclick="navigateTo('about')" class="hover:text-gold-400 transition-colors">About Us</button></li>
+            <li><button onclick="navigateTo('products')" class="hover:text-gold-400 transition-colors">Our Products</button></li>
+            <li><button onclick="navigateTo('how-to-order')" class="hover:text-gold-400 transition-colors">How to Order</button></li>
+            <li><button onclick="navigateTo('contact')" class="hover:text-gold-400 transition-colors">Contact Us</button></li>
+          </ul>
+        </div>
+
+        <!-- Product Categories -->
+        <div>
+          <h4 class="font-brand text-lg font-bold text-gold-400 mb-4">Product Categories</h4>
+          <ul class="space-y-2.5 text-sm text-beige-200">
+            <li><button onclick="filterAndGoProducts('Danut')" class="hover:text-gold-400 transition-colors">Date & Peanut Balls (Danut)</button></li>
+            <li><button onclick="filterAndGoProducts('Kurakkan Laddu')" class="hover:text-gold-400 transition-colors">Kurakkan Laddu</button></li>
+            <li><button onclick="filterAndGoProducts('Hakuru-Inguru')" class="hover:text-gold-400 transition-colors">Hakuru-Inguru Toffee</button></li>
+            <li><button onclick="filterAndGoProducts('Peanut Chikki')" class="hover:text-gold-400 transition-colors">Peanut Chikki</button></li>
+            <li><button onclick="filterAndGoProducts('Combo Boxes')" class="hover:text-gold-400 transition-colors">Gift & Energy Combo Boxes</button></li>
+          </ul>
+        </div>
+
+        <!-- Contact & Policies -->
+        <div>
+          <h4 class="font-brand text-lg font-bold text-gold-400 mb-4">Contact & Policies</h4>
+          <ul class="space-y-2.5 text-sm text-beige-200">
+            <li class="flex items-center gap-2">
+              <i class="fa-brands fa-whatsapp text-[#25D366]"></i>
+              <a id="footer-phone" href="https://wa.me/94782083633" target="_blank" rel="noopener" class="hover:text-gold-400">+94 78 208 3633</a>
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="fa-solid fa-envelope text-gold-400"></i>
+              <a id="footer-email" href="mailto:bsfnumnumbites@gmail.com" class="hover:text-gold-400 break-all">bsfnumnumbites@gmail.com</a>
+            </li>
+            <li class="pt-2 border-t border-choco-800 flex flex-wrap gap-x-4 gap-y-1 text-xs text-beige-300">
+              <button onclick="openPolicyModal('terms')" class="hover:text-gold-400 underline">Terms & Conditions</button>
+              <button onclick="openPolicyModal('privacy')" class="hover:text-gold-400 underline">Privacy Policy</button>
+              <button onclick="openPolicyModal('delivery')" class="hover:text-gold-400 underline">Delivery Policy</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-choco-800 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-beige-300">
+        <p>© 2026 NumNum Bites. All Rights Reserved.</p>
+        <p>Crafted with ❤️ in Sri Lanka • Small Bites, Big Joy</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== SLIDE-OUT SHOPPING CART DRAWER ==================== -->
+  <div id="cart-drawer" class="fixed inset-0 z-50 hidden">
+    <div onclick="toggleCart(false)" class="absolute inset-0 bg-choco-950/60 backdrop-blur-xs"></div>
+    <aside class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-cream-100 shadow-2xl flex flex-col border-l border-beige-200">
+      <!-- Cart Header -->
+      <div class="p-6 bg-choco-900 text-cream-100 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <i class="fa-solid fa-basket-shopping text-gold-400 text-xl"></i>
+          <div>
+            <h2 class="font-brand text-xl font-bold text-white">Your Snack Basket</h2>
+            <p class="text-xs text-beige-200">Checkout directly via WhatsApp</p>
+          </div>
+        </div>
+        <button onclick="toggleCart(false)" class="w-9 h-9 rounded-full bg-choco-800 hover:bg-choco-700 text-white flex items-center justify-center">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Cart Items -->
+      <div id="cart-items-container" class="flex-grow overflow-y-auto p-5 space-y-3">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Cart Footer -->
+      <div class="p-6 bg-white border-t border-beige-200 space-y-4">
+        <div class="space-y-1.5 text-sm">
+          <div class="flex justify-between text-choco-700">
+            <span>Subtotal</span>
+            <span id="cart-subtotal" class="font-semibold">Rs. 0</span>
+          </div>
+          <div class="flex justify-between text-xs text-choco-600">
+            <span>Delivery Charge</span>
+            <span>Calculated via WhatsApp by location</span>
+          </div>
+          <div class="flex justify-between text-lg font-bold text-choco-900 pt-2 border-t border-beige-200">
+            <span>Total Order Amount</span>
+            <span id="cart-total" class="font-brand text-xl text-choco-900">Rs. 0</span>
+          </div>
+        </div>
+
+        <div class="space-y-2.5">
+          <button onclick="checkoutViaWhatsApp()" id="whatsapp-checkout-btn"
+                  class="w-full py-3.5 px-6 rounded-full bg-[#25D366] hover:bg-[#1fb858] text-white font-bold text-sm shadow-md flex items-center justify-center gap-2 transition-all">
+            <i class="fa-brands fa-whatsapp text-xl"></i>
+            <span>Checkout through WhatsApp</span>
+          </button>
+          <button onclick="toggleCart(false)"
+                  class="w-full py-3 px-6 rounded-full bg-beige-100 hover:bg-beige-200 text-choco-900 font-bold text-xs transition-colors">
+            Continue Shopping
+          </button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- ==================== PRODUCT DETAIL MODAL ==================== -->
+  <div id="product-detail-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+    <div onclick="closeProductDetailModal()" class="absolute inset-0 bg-choco-950/65 backdrop-blur-xs"></div>
+    <div id="product-detail-content" class="relative bg-white rounded-[2rem] max-w-2xl w-full overflow-hidden shadow-2xl border border-beige-200 z-10 fade-in">
+      <!-- Populated dynamically -->
+    </div>
+  </div>
+
+  <!-- ==================== POLICY MODAL ==================== -->
+  <div id="policy-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+    <div onclick="closePolicyModal()" class="absolute inset-0 bg-choco-950/65 backdrop-blur-xs"></div>
+    <div class="relative bg-white rounded-[2rem] max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-beige-200 z-10 fade-in">
+      <div class="flex items-center justify-between mb-4">
+        <h3 id="policy-modal-title" class="font-brand text-2xl font-bold text-choco-900">Policy</h3>
+        <button onclick="closePolicyModal()" class="w-9 h-9 rounded-full bg-beige-100 text-choco-900 flex items-center justify-center">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <ul id="policy-modal-list" class="space-y-3 text-sm text-choco-800 max-h-80 overflow-y-auto pr-2"></ul>
+      <button onclick="closePolicyModal()" class="mt-6 w-full py-3 rounded-full bg-choco-900 text-cream-100 font-bold text-sm">Close</button>
+    </div>
+  </div>
+
+  <!-- ==================== ADMIN LOGIN MODAL ==================== -->
+  <div id="admin-login-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+    <div onclick="closeAdminModal()" class="absolute inset-0 bg-choco-950/70 backdrop-blur-xs"></div>
+    <div class="relative bg-white rounded-[2rem] max-w-md w-full p-8 shadow-2xl border border-beige-200 z-10 fade-in">
+      <button onclick="closeAdminModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-beige-100 text-choco-900 flex items-center justify-center">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="text-center mb-6">
+        <div class="w-16 h-16 rounded-2xl bg-choco-900 text-gold-400 flex items-center justify-center text-2xl mx-auto mb-3 shadow">
+          <i class="fa-solid fa-user-shield"></i>
+        </div>
+        <h2 class="font-brand text-2xl font-bold text-choco-900">Owner Admin Portal</h2>
+        <p class="text-xs text-choco-600 mt-1">Sign in to manage products, upload snack images & update prices.</p>
+      </div>
+
+      <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold uppercase text-choco-800 mb-1">Admin Email</label>
+          <input type="email" id="admin-login-email" required placeholder="bsfnumnumbites@gmail.com"
+                 class="w-full px-4 py-3 rounded-2xl bg-cream-100 border border-beige-200 text-sm focus:outline-none focus:border-choco-900" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold uppercase text-choco-800 mb-1">Password / Access Passcode</label>
+          <input type="password" id="admin-login-pass" required placeholder="Enter admin password"
+                 class="w-full px-4 py-3 rounded-2xl bg-cream-100 border border-beige-200 text-sm focus:outline-none focus:border-choco-900" />
+        </div>
+
+        <div class="bg-beige-100/80 p-3 rounded-xl text-[11px] text-choco-700 border border-beige-200">
+          <strong>First-Time Setup Note:</strong> Enter your admin email (e.g., <code class="font-mono">bsfnumnumbites@gmail.com</code>) and set your session passcode (min 6 chars) to initialize your secure owner session, or connect Firebase Auth inside the dashboard.
+        </div>
+
+        <button type="submit" class="w-full py-3.5 rounded-full bg-choco-900 hover:bg-choco-800 text-cream-100 font-bold text-sm shadow-md">
+          Access Admin Dashboard
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== ADMIN ADD / EDIT PRODUCT MODAL ==================== -->
+  <div id="product-editor-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+    <div onclick="closeProductEditorModal()" class="absolute inset-0 bg-choco-950/70 backdrop-blur-xs"></div>
+    <div class="relative bg-white rounded-[2rem] max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-beige-200 z-10 max-h-[92vh] overflow-y-auto fade-in">
+      <div class="flex items-center justify-between mb-5">
+        <h3 id="product-editor-title" class="font-brand text-2xl font-bold text-choco-900">Edit Product</h3>
+        <button onclick="closeProductEditorModal()" class="w-9 h-9 rounded-full bg-beige-100 text-choco-900 flex items-center justify-center">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form onsubmit="saveProductForm(event)" class="space-y-4">
+        <input type="hidden" id="prod-edit-id" />
+
+        <!-- Image Preview & Upload -->
+        <div class="bg-cream-100 p-4 rounded-2xl border border-beige-200 flex flex-col sm:flex-row items-center gap-4">
+          <div id="prod-edit-img-preview" class="w-28 h-28 rounded-2xl overflow-hidden bg-beige-100 border border-beige-300 shrink-0"></div>
+          <div class="space-y-2 text-center sm:text-left">
+            <span class="text-xs font-bold text-choco-900 block">Product Photograph</span>
+            <p class="text-[11px] text-choco-600">Upload a high-resolution photo from your device. Changes reflect immediately.</p>
+            <div class="flex flex-wrap gap-2 justify-center sm:justify-start">
+              <label class="px-4 py-2 rounded-xl bg-choco-900 text-cream-100 text-xs font-bold cursor-pointer hover:bg-choco-800">
+                <i class="fa-solid fa-camera mr-1"></i> Upload Photo
+                <input type="file" accept="image/*" class="hidden" onchange="handleProductPhotoPreview(event)" />
+              </label>
+              <button type="button" onclick="clearProductUploadedPhoto()" class="px-3 py-2 rounded-xl bg-beige-200 text-choco-900 text-xs font-semibold">
+                Use Default Kraft Visual
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-choco-800 mb-1">Product Name *</label>
+            <input type="text" id="prod-edit-name" required class="w-full px-4 py-2.5 rounded-xl bg-cream-100 border border-beige-200 text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-choco-800 mb-1">Price (LKR) *</label>
+            <input type="number" id="prod-edit-price" required min="1" step="1" class="w-full px-4 py-2.5 rounded-xl bg-cream-100 border border-beige-200 text-sm" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-choco-800 mb-1">Category *</label>
+            <input type="text" id="prod-edit-category" list="category-suggestions" required class="w-full px-4 py-2.5 rounded-xl bg-cream-100 border border-beige-200 text-sm" />
+            <datalist id="category-suggestions">
+              <option value="Danut"></option>
+              <option value="Kurakkan Laddu"></option>
+              <option value="Hakuru-Inguru"></option>
+              <option value="Peanut Chikki"></option>
+              <option value="Combo Boxes"></option>
+            </datalist>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-choco-800 mb-1">Availability Status</label>
+            <select id="prod-edit-available" class="w-full px-4 py-2.5 rounded-xl bg-cream-100 border border-beige-200 text-sm font-semibold">
+              <option value="true">In Stock (Available)</option>
+              <option value="false">Out of Stock</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-choco-800 mb-1">Description *</label>
+          <textarea id="prod-edit-desc" rows="3" required class="w-full px-4 py-2.5 rounded-xl bg-cream-100 border border-beige-200 text-sm"></textarea>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <input type="checkbox" id="prod-edit-popular" class="w-4 h-4 accent-choco-900 rounded" />
+          <label for="prod-edit-popular" class="text-xs font-bold text-choco-800">Feature in "Popular Snacks" on Home Page</label>
+        </div>
+
+        <div class="flex justify-end gap-3 pt-3 border-t border-beige-200">
+          <button type="button" onclick="closeProductEditorModal()" class="px-5 py-2.5 rounded-full bg-beige-100 text-choco-900 text-xs font-bold">Cancel</button>
+          <button type="submit" class="px-6 py-2.5 rounded-full bg-choco-900 text-cream-100 text-xs font-bold shadow">Save Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed bottom-5 right-5 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- ==================== JAVASCRIPT APPLICATION LOGIC ==================== -->
+  <script>
+    /*************************************************************************
+     * 1. CUSTOM SVG ARTWORK GENERATOR (Matches PDF Kraft Boxes & Seal Logo)
+     *************************************************************************/
+    function getDefaultLogoSVG() {
+      return `
+        <svg viewBox="0 0 200 200" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="96" fill="#3B1E10"/>
+          <circle cx="100" cy="100" r="87" fill="none" stroke="#FDF8F2" stroke-width="3" stroke-dasharray="14 4 40 3"/>
+          <circle cx="100" cy="100" r="81" fill="none" stroke="#E7C294" stroke-width="1.5"/>
+          <!-- Three celebratory bursts at top (matching page 1 logo) -->
+          <rect x="73" y="34" width="7" height="22" rx="3.5" transform="rotate(-28 76 45)" fill="#FDF8F2"/>
+          <rect x="96.5" y="27" width="7" height="24" rx="3.5" fill="#FDF8F2"/>
+          <rect x="120" y="34" width="7" height="22" rx="3.5" transform="rotate(28 123 45)" fill="#FDF8F2"/>
+          <!-- Brand Text -->
+          <text x="100" y="96" text-anchor="middle" fill="#FDF8F2" font-family="Fredoka, sans-serif" font-weight="700" font-size="34" letter-spacing="-0.5">NumNum</text>
+          <text x="100" y="133" text-anchor="middle" fill="#E7B980" font-family="Fredoka, sans-serif" font-weight="700" font-size="33" font-style="italic">Bites</text>
+          <!-- Double underline swoosh -->
+          <path d="M 65 144 Q 100 138 135 144" stroke="#E7B980" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+          <path d="M 76 151 Q 100 147 124 151" stroke="#E7B980" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        </svg>
+      `;
+    }
+
+    // Generates realistic brown kraft packaging illustrations matching pages 2-6 of the PDF
+    function getProductArtworkSVG(visualType, title = '') {
+      const labelBadge = (subtitle, countText) => `
+        <g transform="translate(115, 168)">
+          <rect x="0" y="0" width="90" height="72" rx="8" fill="#FDF8F2" stroke="#D6BC99" stroke-width="1.5"/>
+          <path d="M 0 56 Q 12 45 18 72 L 0 72 Z" fill="#6D7B3A"/>
+          <path d="M 90 56 Q 78 45 72 72 L 90 72 Z" fill="#6D7B3A"/>
+          <text x="45" y="18" text-anchor="middle" fill="#3B1E10" font-family="Fredoka, sans-serif" font-weight="700" font-size="13">Num</text>
+          <text x="45" y="30" text-anchor="middle" fill="#3B1E10" font-family="Fredoka, sans-serif" font-weight="700" font-size="13">Num</text>
+          <text x="45" y="42" text-anchor="middle" fill="#3B1E10" font-family="Fredoka, sans-serif" font-weight="700" font-size="13">Bites</text>
+          <text x="45" y="54" text-anchor="middle" fill="#6B3A20" font-family="sans-serif" font-weight="700" font-size="6.8">${subtitle}</text>
+          <text x="45" y="64" text-anchor="middle" fill="#4A6B3E" font-family="sans-serif" font-weight="700" font-size="6.5">${countText}</text>
+        </g>
+      `;
+
+      if (visualType === 'danut-4' || visualType === 'danut-8') {
+        const is8 = visualType === 'danut-8';
+        return `
+          <svg viewBox="0 0 320 260" class="w-full h-full object-cover" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="260" fill="#EFE4D6"/>
+            <ellipse cx="160" cy="236" rx="105" ry="14" fill="rgba(59,30,16,0.14)"/>
+            <!-- Open Kraft Lid -->
+            <polygon points="88,32 232,32 246,96 74,96" fill="#B5895A" stroke="#8C6239" stroke-width="1.5"/>
+            <polygon points="74,96 246,96 246,162 74,162" fill="#9E7247"/>
+            <!-- Date & Peanut Energy Balls inside -->
+            <g>
+              <circle cx="112" cy="122" r="22" fill="#4A2715"/><circle cx="106" cy="116" r="3" fill="#E7C294"/><circle cx="118" cy="125" r="2.5" fill="#D6A468"/><circle cx="109" cy="129" r="2" fill="#F3E8D8"/>
+              <circle cx="160" cy="120" r="22" fill="#3E1F10"/><circle cx="154" cy="114" r="3" fill="#E7C294"/><circle cx="166" cy="123" r="2.5" fill="#D6A468"/><circle cx="158" cy="127" r="2" fill="#F3E8D8"/>
+              <circle cx="208" cy="122" r="22" fill="#4A2715"/><circle cx="202" cy="116" r="3" fill="#E7C294"/><circle cx="213" cy="124" r="2.5" fill="#D6A468"/>
+              <circle cx="115" cy="148" r="23" fill="#522B17"/><circle cx="108" cy="142" r="3" fill="#E7C294"/><circle cx="121" cy="149" r="2.5" fill="#F3E8D8"/>
+              <circle cx="162" cy="148" r="23" fill="#462413"/><circle cx="156" cy="141" r="3" fill="#D6A468"/><circle cx="168" cy="150" r="2.5" fill="#F3E8D8"/>
+              <circle cx="206" cy="148" r="23" fill="#522B17"/><circle cx="200" cy="142" r="3" fill="#E7C294"/><circle cx="212" cy="149" r="2.5" fill="#D6A468"/>
+            </g>
+            <!-- Kraft Box Front -->
+            <rect x="74" y="156" width="172" height="82" rx="4" fill="#C49A6C" stroke="#8C6239" stroke-width="1.5"/>
+            ${labelBadge('Date & Peanut', is8 ? '8 Pieces' : '4 Pieces')}
+          </svg>
+        `;
+      }
+
+      if (visualType === 'kurakkan-4' || visualType === 'kurakkan-8') {
+        const is8 = visualType === 'kurakkan-8';
+        return `
+          <svg viewBox="0 0 320 260" class="w-full h-full object-cover" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="260" fill="#EFE4D6"/>
+            <ellipse cx="160" cy="236" rx="102" ry="14" fill="rgba(59,30,16,0.14)"/>
+            <polygon points="90,34 230,34 244,96 76,96" fill="#B88D5E" stroke="#8C6239" stroke-width="1.5"/>
+            <polygon points="76,96 244,96 244,160 76,160" fill="#9B6E43"/>
+            <!-- Kurakkan Laddu Balls -->
+            <g>
+              <circle cx="126" cy="126" r="24" fill="#6E4427"/><circle cx="120" cy="120" r="2.5" fill="#F3E8D8"/><circle cx="133" cy="124" r="2.5" fill="#E5A93C"/><circle cx="124" cy="133" r="2" fill="#F3E8D8"/>
+              <circle cx="194" cy="126" r="24" fill="#633C21"/><circle cx="188" cy="119" r="2.5" fill="#F3E8D8"/><circle cx="200" cy="127" r="2.5" fill="#E5A93C"/>
+              <circle cx="126" cy="150" r="24" fill="#774A2B"/><circle cx="119" cy="144" r="2.5" fill="#E5A93C"/><circle cx="132" cy="151" r="2" fill="#F3E8D8"/>
+              <circle cx="194" cy="150" r="24" fill="#6E4427"/><circle cx="187" cy="144" r="2.5" fill="#F3E8D8"/><circle cx="199" cy="152" r="2.5" fill="#E5A93C"/>
+            </g>
+            <rect x="76" y="156" width="168" height="82" rx="4" fill="#C69C6E" stroke="#8C6239" stroke-width="1.5"/>
+            ${labelBadge('Kurakkan Balls', is8 ? '8 Pieces' : '4 Pieces')}
+          </svg>
+        `;
+      }
+
+      if (visualType === 'hakuru-4' || visualType === 'hakuru-8') {
+        const is8 = visualType === 'hakuru-8';
+        return `
+          <svg viewBox="0 0 320 260" class="w-full h-full object-cover" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="260" fill="#EFE4D6"/>
+            <ellipse cx="160" cy="236" rx="102" ry="14" fill="rgba(59,30,16,0.14)"/>
+            <polygon points="88,34 232,34 246,96 74,96" fill="#B5895A" stroke="#8C6239" stroke-width="1.5"/>
+            <polygon points="74,96 246,96 246,160 74,160" fill="#9A6D42"/>
+            <!-- Golden Kithul Ginger Toffee Cubes -->
+            <g>
+              <rect x="92" y="114" width="38" height="32" rx="5" fill="#C97E28" stroke="#9C5B14" stroke-width="1.5"/>
+              <rect x="138" y="114" width="38" height="32" rx="5" fill="#D6892E" stroke="#9C5B14" stroke-width="1.5"/>
+              <rect x="184" y="114" width="38" height="32" rx="5" fill="#C97E28" stroke="#9C5B14" stroke-width="1.5"/>
+              <rect x="92" y="138" width="38" height="28" rx="5" fill="#DF9538" stroke="#9C5B14" stroke-width="1.5"/>
+              <rect x="138" y="138" width="38" height="28" rx="5" fill="#C97E28" stroke="#9C5B14" stroke-width="1.5"/>
+              <rect x="184" y="138" width="38" height="28" rx="5" fill="#DF9538" stroke="#9C5B14" stroke-width="1.5"/>
+            </g>
+            <rect x="74" y="156" width="172" height="82" rx="4" fill="#C49A6C" stroke="#8C6239" stroke-width="1.5"/>
+            ${labelBadge('Kithul Ginger', is8 ? '8 Pieces' : '4 Pieces')}
+          </svg>
+        `;
+      }
+
+      if (visualType === 'chikki-4' || visualType === 'chikki-8') {
+        const is8 = visualType === 'chikki-8';
+        return `
+          <svg viewBox="0 0 320 260" class="w-full h-full object-cover" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="260" fill="#EFE4D6"/>
+            <ellipse cx="160" cy="236" rx="104" ry="14" fill="rgba(59,30,16,0.14)"/>
+            <polygon points="86,32 234,32 248,96 72,96" fill="#B5895A" stroke="#8C6239" stroke-width="1.5"/>
+            <polygon points="72,96 248,96 248,160 72,160" fill="#986B40"/>
+            <!-- Crunchy Peanut & Sesame Chikki Squares -->
+            <g>
+              <rect x="88" y="112" width="44" height="36" rx="4" fill="#A86424" stroke="#7A4312" stroke-width="1.5"/>
+              <ellipse cx="102" cy="124" rx="6" ry="4" fill="#E8C38E"/><ellipse cx="118" cy="132" rx="6" ry="4" fill="#E8C38E"/><circle cx="110" cy="120" r="1.5" fill="#FFF"/>
+              <rect x="138" y="112" width="44" height="36" rx="4" fill="#B56E29" stroke="#7A4312" stroke-width="1.5"/>
+              <ellipse cx="152" cy="126" rx="6" ry="4" fill="#E8C38E"/><ellipse cx="168" cy="122" rx="6" ry="4" fill="#E8C38E"/><circle cx="160" cy="134" r="1.5" fill="#FFF"/>
+              <rect x="188" y="112" width="44" height="36" rx="4" fill="#A86424" stroke="#7A4312" stroke-width="1.5"/>
+              <ellipse cx="202" cy="124" rx="6" ry="4" fill="#E8C38E"/><ellipse cx="218" cy="131" rx="6" ry="4" fill="#E8C38E"/>
+              <rect x="88" y="138" width="44" height="28" rx="4" fill="#BD752E" stroke="#7A4312" stroke-width="1.5"/>
+              <ellipse cx="104" cy="148" rx="6" ry="4" fill="#E8C38E"/>
+              <rect x="138" y="138" width="44" height="28" rx="4" fill="#A86424" stroke="#7A4312" stroke-width="1.5"/>
+              <ellipse cx="156" cy="148" rx="6" ry="4" fill="#E8C38E"/>
+              <rect x="188" y="138" width="44" height="28" rx="4" fill="#BD752E" stroke="#7A4312" stroke-width="1.5"/>
+              <ellipse cx="206" cy="148" rx="6" ry="4" fill="#E8C38E"/>
+            </g>
+            <rect x="72" y="156" width="176" height="82" rx="4" fill="#C49A6C" stroke="#8C6239" stroke-width="1.5"/>
+            ${labelBadge('Peanut Chikki', is8 ? '8 Pieces' : '4 Pieces')}
+          </svg>
+        `;
+      }
+
+      // Combo Boxes (Matches Page 5 & Page 6 Belly-Band Kraft Combo Box)
+      const isCombo2 = visualType.includes('combo2');
+      const isLarge = visualType.includes('large');
+      return `
+        <svg viewBox="0 0 320 260" class="w-full h-full object-cover" xmlns="http://www.w3.org/2000/svg">
+          <rect width="320" height="260" fill="#EFE4D6"/>
+          <ellipse cx="160" cy="236" rx="125" ry="14" fill="rgba(59,30,16,0.16)"/>
+          <!-- Wide Kraft Tray -->
+          <rect x="36" y="42" width="248" height="186" rx="8" fill="#B5895A" stroke="#7D542D" stroke-width="2"/>
+          <rect x="44" y="50" width="232" height="170" rx="5" fill="#8C6037"/>
+          <!-- Left Side Balls -->
+          <g>
+            <circle cx="76" cy="76" r="17" fill="${isCombo2 ? '#6E4427' : '#4A2715'}"/><circle cx="71" cy="71" r="2" fill="#E7C294"/>
+            <circle cx="110" cy="76" r="17" fill="${isCombo2 ? '#633C21' : '#3E1F10'}"/><circle cx="105" cy="71" r="2" fill="#E7C294"/>
+            <circle cx="76" cy="112" r="17" fill="${isCombo2 ? '#774A2B' : '#522B17'}"/><circle cx="72" cy="108" r="2" fill="#F3E8D8"/>
+            <circle cx="110" cy="112" r="17" fill="${isCombo2 ? '#6E4427' : '#4A2715'}"/><circle cx="105" cy="108" r="2" fill="#E7C294"/>
+            <circle cx="76" cy="148" r="17" fill="${isCombo2 ? '#633C21' : '#3E1F10'}"/><circle cx="71" cy="144" r="2" fill="#E7C294"/>
+            <circle cx="110" cy="148" r="17" fill="${isCombo2 ? '#774A2B' : '#522B17'}"/><circle cx="106" cy="144" r="2" fill="#F3E8D8"/>
+            <circle cx="76" cy="184" r="17" fill="${isCombo2 ? '#6E4427' : '#4A2715'}"/><circle cx="72" cy="180" r="2" fill="#E7C294"/>
+            <circle cx="110" cy="184" r="17" fill="${isCombo2 ? '#633C21' : '#3E1F10'}"/><circle cx="105" cy="180" r="2" fill="#E7C294"/>
+          </g>
+          <!-- Right Side Squares (Toffee or Chikki) -->
+          <g>
+            <rect x="195" y="60" width="34" height="32" rx="4" fill="${isCombo2 ? '#D6892E' : '#B56E29'}" stroke="#7A4312"/>
+            <rect x="234" y="60" width="34" height="32" rx="4" fill="${isCombo2 ? '#C97E28' : '#A86424'}" stroke="#7A4312"/>
+            <rect x="195" y="97" width="34" height="32" rx="4" fill="${isCombo2 ? '#C97E28' : '#A86424'}" stroke="#7A4312"/>
+            <rect x="234" y="97" width="34" height="32" rx="4" fill="${isCombo2 ? '#DF9538' : '#BD752E'}" stroke="#7A4312"/>
+            <rect x="195" y="134" width="34" height="32" rx="4" fill="${isCombo2 ? '#DF9538' : '#BD752E'}" stroke="#7A4312"/>
+            <rect x="234" y="134" width="34" height="32" rx="4" fill="${isCombo2 ? '#C97E28' : '#A86424'}" stroke="#7A4312"/>
+            <rect x="195" y="171" width="34" height="32" rx="4" fill="${isCombo2 ? '#C97E28' : '#A86424'}" stroke="#7A4312"/>
+            <rect x="234" y="171" width="34" height="32" rx="4" fill="${isCombo2 ? '#D6892E' : '#B56E29'}" stroke="#7A4312"/>
+          </g>
+          <!-- Cream Belly Band Sleeve -->
+          <rect x="122" y="40" width="76" height="190" fill="#FDF8F2" stroke="#D6BC99" stroke-width="1.5"/>
+          <text x="160" y="76" text-anchor="middle" fill="#3B1E10" font-family="Fredoka, sans-serif" font-weight="700" font-size="18">Num</text>
+          <text x="160" y="93" text-anchor="middle" fill="#3B1E10" font-family="Fredoka, sans-serif" font-weight="700" font-size="18">Num</text>
+          <text x="160" y="110" text-anchor="middle" fill="#3B1E10" font-family="Fredoka, sans-serif" font-weight="700" font-size="18">Bites</text>
+          <text x="160" y="130" text-anchor="middle" fill="#6B3A20" font-family="sans-serif" font-weight="700" font-size="9">${isCombo2 ? 'Combo Box 2' : 'Combo Box 1'}</text>
+          <text x="160" y="144" text-anchor="middle" fill="#4A6B3E" font-family="sans-serif" font-weight="700" font-size="7.5">${isLarge ? 'Large Combo' : 'Small Combo'}</text>
+          <circle cx="160" cy="176" r="16" fill="#F3E8D8"/>
+          <text x="160" y="180" text-anchor="middle" font-size="14">${isCombo2 ? '🌴' : '🥜'}</text>
+        </svg>
+      `;
+    }
+
+    // Hero Flatlay Artwork matching Page 2 of PDF (Two open kraft boxes + dates, ginger, sesame, peanuts, kithul bowl)
+    function getDefaultHeroArtworkSVG() {
+      return `
+        <svg viewBox="0 0 800 550" class="w-full h-full object-cover" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="linenGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#F6EDE0"/>
+              <stop offset="100%" stop-color="#E6D5BE"/>
+            </linearGradient>
+          </defs>
+          <rect width="800" height="550" fill="url(#linenGrad)"/>
+
+          <!-- Scattered Sesame Seeds Left -->
+          <g fill="#2B1B12" opacity="0.8">
+            <circle cx="145" cy="210" r="2.5"/><circle cx="156" cy="218" r="2"/><circle cx="138" cy="225" r="2.5"/><circle cx="162" cy="204" r="2"/>
+            <circle cx="150" cy="234" r="2"/><circle cx="130" cy="215" r="2"/><circle cx="168" cy="228" r="2.5"/>
+          </g>
+          <g fill="#E6C994">
+            <circle cx="182" cy="212" r="2.5"/><circle cx="192" cy="222" r="2.5"/><circle cx="176" cy="230" r="2"/><circle cx="188" cy="202" r="2"/>
+          </g>
+
+          <!-- Natural Dates Left -->
+          <g>
+            <ellipse cx="105" cy="310" rx="22" ry="12" transform="rotate(-25 105 310)" fill="#4E2314"/>
+            <ellipse cx="148" cy="335" rx="22" ry="12" transform="rotate(15 148 335)" fill="#5C2A18"/>
+            <ellipse cx="112" cy="368" rx="22" ry="12" transform="rotate(-10 112 368)" fill="#451E10"/>
+            <ellipse cx="195" cy="322" rx="21" ry="11" transform="rotate(-35 195 322)" fill="#5C2A18"/>
+            <ellipse cx="198" cy="378" rx="22" ry="12" transform="rotate(20 198 378)" fill="#4E2314"/>
+          </g>
+
+          <!-- Fresh Ginger Root Bottom Left -->
+          <g fill="#D7B27C" stroke="#B68E56" stroke-width="2">
+            <path d="M 95 450 Q 115 425 140 442 Q 160 420 175 445 Q 185 470 155 482 Q 125 492 98 475 Z"/>
+            <ellipse cx="168" cy="488" rx="22" ry="14" transform="rotate(-15 168 488)"/>
+          </g>
+
+          <!-- Left Open Kraft Box (Energy Balls) -->
+          <g transform="translate(235, 165)">
+            <rect x="0" y="0" width="155" height="90" rx="6" fill="#9E7247" stroke="#7A522C" stroke-width="2"/>
+            <rect x="0" y="88" width="155" height="175" rx="6" fill="#7D542D" stroke="#633F1E" stroke-width="2"/>
+            <!-- 9 Energy Balls -->
+            <circle cx="34" cy="122" r="21" fill="#4A2715"/><circle cx="28" cy="116" r="2.5" fill="#E7C294"/>
+            <circle cx="78" cy="120" r="21" fill="#3E1F10"/><circle cx="72" cy="114" r="2.5" fill="#E7C294"/>
+            <circle cx="122" cy="122" r="21" fill="#522B17"/><circle cx="116" cy="116" r="2.5" fill="#E7C294"/>
+            <circle cx="34" cy="166" r="21" fill="#522B17"/><circle cx="29" cy="160" r="2.5" fill="#F3E8D8"/>
+            <circle cx="78" cy="166" r="21" fill="#4A2715"/><circle cx="73" cy="160" r="2.5" fill="#E7C294"/>
+            <circle cx="122" cy="166" r="21" fill="#3E1F10"/><circle cx="117" cy="160" r="2.5" fill="#E7C294"/>
+            <circle cx="34" cy="210" r="21" fill="#4A2715"/><circle cx="28" cy="204" r="2.5" fill="#E7C294"/>
+            <circle cx="78" cy="210" r="21" fill="#522B17"/><circle cx="72" cy="204" r="2.5" fill="#F3E8D8"/>
+            <circle cx="122" cy="210" r="21" fill="#4A2715"/><circle cx="116" cy="204" r="2.5" fill="#E7C294"/>
+            <!-- Cream Bottom Sleeve -->
+            <rect x="0" y="232" width="155" height="44" rx="4" fill="#FDF8F2" stroke="#D6BC99" stroke-width="1.5"/>
+            <text x="77" y="259" text-anchor="middle" fill="#3B1E10" font-family="Fredoka, sans-serif" font-weight="700" font-size="15">NumNum Bites</text>
+          </g>
+
+          <!-- Right Open Kraft Box (Kithul Toffee & Peanut Chikki) -->
+          <g transform="translate(415, 165)">
+            <rect x="0" y="0" width="155" height="90" rx="6" fill="#9E7247" stroke="#7A522C" stroke-width="2"/>
+            <rect x="0" y="88" width="155" height="175" rx="6" fill="#7D542D" stroke="#633F1E" stroke-width="2"/>
+            <!-- Toffee & Chikki Squares -->
+            <rect x="14" y="102" width="38" height="38" rx="5" fill="#D6892E" stroke="#9C5B14" stroke-width="1.5"/>
+            <rect x="58" y="102" width="38" height="38" rx="5" fill="#C97E28" stroke="#9C5B14" stroke-width="1.5"/>
+            <rect x="102" y="102" width="38" height="38" rx="5" fill="#B56E29" stroke="#7A4312" stroke-width="1.5"/>
+            <ellipse cx="115" cy="116" rx="5" ry="3.5" fill="#F3E8D8"/><ellipse cx="128" cy="126" rx="5" ry="3.5" fill="#F3E8D8"/>
+
+            <rect x="14" y="146" width="38" height="38" rx="5" fill="#DF9538" stroke="#9C5B14" stroke-width="1.5"/>
+            <rect x="58" y="146" width="38" height="38" rx="5" fill="#D6892E" stroke="#9C5B14" stroke-width="1.5"/>
+            <rect x="102" y="146" width="38" height="38" rx="5" fill="#A86424" stroke="#7A4312" stroke-width="1.5"/>
+            <ellipse cx="116" cy="160" rx="5" ry="3.5" fill="#F3E8D8"/><ellipse cx="127" cy="170" rx="5" ry="3.5" fill="#F3E8D8"/>
+
+            <rect x="14" y="190" width="38" height="38" rx="5" fill="#C97E28" stroke="#9C5B14" stroke-width="1.5"/>
+            <rect x="58" y="190" width="38" height="38" rx="5" fill="#DF9538" stroke="#9C5B14" stroke-width="1.5"/>
+            <rect x="102" y="190" width="38" height="38" rx="5" fill="#B56E29" stroke="#7A4312" stroke-width="1.5"/>
+            <ellipse cx="116" cy="204" rx="5" ry="3.5" fill="#F3E8D8"/>
+
+            <!-- Cream Bottom Sleeve -->
+            <rect x="0" y="232" width="155" height="44" rx="4" fill="#FDF8F2" stroke="#D6BC99" stroke-width="1.5"/>
+            <text x="77" y="259" text-anchor="middle" fill="#3B1E10" font-family="Fredoka, sans-serif" font-weight="700" font-size="15">Small Bites, Big Joy</text>
+          </g>
+
+          <!-- Right Side: Roasted Peanuts & Ceramic Bowls of Kithul Treacle -->
+          <g>
+            <ellipse cx="620" cy="180" rx="14" ry="8" transform="rotate(25 620 180)" fill="#D9A86C"/>
+            <ellipse cx="665" cy="205" rx="15" ry="8" transform="rotate(-15 665 205)" fill="#C99355"/>
+            <ellipse cx="695" cy="235" rx="14" ry="8" transform="rotate(40 695 235)" fill="#D9A86C"/>
+            <!-- Ceramic Bowl with Kithul Jaggery Treacle -->
+            <circle cx="625" cy="315" r="42" fill="#8D7B68" stroke="#5C4E40" stroke-width="3"/>
+            <circle cx="625" cy="315" r="33" fill="#3B1A0A"/>
+            <!-- Second Ceramic Bowl -->
+            <circle cx="715" cy="332" r="36" fill="#9E8B76" stroke="#5C4E40" stroke-width="3"/>
+            <circle cx="715" cy="332" r="27" fill="#6E5D4C"/>
+            <!-- Cinnamon Sticks -->
+            <rect x="670" y="405" width="48" height="7" rx="3" transform="rotate(-22 670 405)" fill="#7A3E1D"/>
+            <rect x="678" y="416" width="48" height="7" rx="3" transform="rotate(-14 678 416)" fill="#8F4B24"/>
+          </g>
+        </svg>
+      `;
+    }
+
+    /*************************************************************************
+     * 2. DEFAULT DATA (All 12 Exact Products, Policies, Offers & Settings)
+     *************************************************************************/
+    const DEFAULT_PRODUCTS = [
+      {
+        id: 'danut-4',
+        name: 'Danut 4pcs',
+        category: 'Danut',
+        price: 325,
+        description: 'Rich date and peanut balls, naturally sweet and filling.',
+        visualType: 'danut-4',
+        customImage: '',
+        available: true,
+        popular: true
+      },
+      {
+        id: 'danut-8',
+        name: 'Danut 8pcs',
+        category: 'Danut',
+        price: 625,
+        description: 'Rich date and peanut balls, naturally sweet and filling.',
+        visualType: 'danut-8',
+        customImage: '',
+        available: true,
+        popular: false
+      },
+      {
+        id: 'kurakkan-4',
+        name: 'Kurakkan Laddu 4pcs',
+        category: 'Kurakkan Laddu',
+        price: 260,
+        description: 'Nutty kurakkan balls with peanuts and a hint of sweetness for a healthy energy boost.',
+        visualType: 'kurakkan-4',
+        customImage: '',
+        available: true,
+        popular: true
+      },
+      {
+        id: 'kurakkan-8',
+        name: 'Kurakkan Laddu 8pcs',
+        category: 'Kurakkan Laddu',
+        price: 490,
+        description: 'Nutty kurakkan balls with peanuts and a hint of sweetness for a healthy energy boost.',
+        visualType: 'kurakkan-8',
+        customImage: '',
+        available: true,
+        popular: false
+      },
+      {
+        id: 'hakuru-4',
+        name: 'Hakuru-Inguru 4pcs',
+        category: 'Hakuru-Inguru',
+        price: 300,
+        description: 'Soft, golden toffee made with real kithul and warming ginger.',
+        visualType: 'hakuru-4',
+        customImage: '',
+        available: true,
+        popular: true
+      },
+      {
+        id: 'hakuru-8',
+        name: 'Hakuru-Inguru 8pcs',
+        category: 'Hakuru-Inguru',
+        price: 550,
+        description: 'Soft, golden toffee made with real kithul and warming ginger.',
+        visualType: 'hakuru-8',
+        customImage: '',
+        available: true,
+        popular: false
+      },
+      {
+        id: 'chikki-4',
+        name: 'Peanut Chikki 4pcs',
+        category: 'Peanut Chikki',
+        price: 340,
+        description: 'Crunchy peanut and sesame chikki with the perfect sweet, toasty bite.',
+        visualType: 'chikki-4',
+        customImage: '',
+        available: true,
+        popular: true
+      },
+      {
+        id: 'chikki-8',
+        name: 'Peanut Chikki 8pcs',
+        category: 'Peanut Chikki',
+        price: 650,
+        description: 'Crunchy peanut and sesame chikki with the perfect sweet, toasty bite.',
+        visualType: 'chikki-8',
+        customImage: '',
+        available: true,
+        popular: false
+      },
+      {
+        id: 'combo1-small',
+        name: 'Danut and Peanut Chikki (Small Box)',
+        category: 'Combo Boxes',
+        price: 725,
+        description: 'Combo Box 1: The best of both Date and Peanut Balls + Peanut and Sesame Chikki in one box.',
+        visualType: 'combo1-small',
+        customImage: '',
+        available: true,
+        popular: false
+      },
+      {
+        id: 'combo1-large',
+        name: 'Danut and Peanut Chikki (Large Box)',
+        category: 'Combo Boxes',
+        price: 1425,
+        description: 'Combo Box 1: The best of both Date and Peanut Balls + Peanut and Sesame Chikki in one box.',
+        visualType: 'combo1-large',
+        customImage: '',
+        available: true,
+        popular: false
+      },
+      {
+        id: 'combo2-small',
+        name: 'Kurakkan Laddu and Hakuru-Inguru (Small Box)',
+        category: 'Combo Boxes',
+        price: 620,
+        description: 'Combo Box 2: The best of both Kurakkan Balls + Kithul Ginger Toffee in one box.',
+        visualType: 'combo2-small',
+        customImage: '',
+        available: true,
+        popular: false
+      },
+      {
+        id: 'combo2-large',
+        name: 'Kurakkan Laddu and Hakuru-Inguru (Large Box)',
+        category: 'Combo Boxes',
+        price: 1220,
+        description: 'Combo Box 2: The best of both Kurakkan Balls + Kithul Ginger Toffee in one box.',
+        visualType: 'combo2-large',
+        customImage: '',
+        available: true,
+        popular: false
+      }
+    ];
+
+    const DEFAULT_SETTINGS = {
+      heroHeading: 'Healthy Bites, Happy Life!',
+      heroSubheading: 'Discover delicious, natural and healthy snacks made with carefully selected ingredients.',
+      heroSlogan: 'Small Bites, Big Joy.',
+      whatsappNumber: '94782083633',
+      displayPhone: '+94 78 208 3633',
+      email: 'bsfnumnumbites@gmail.com',
+      socials: {
+        instagram: 'https://instagram.com',
+        facebook: 'https://facebook.com',
+        youtube: 'https://youtube.com',
+        tiktok: 'https://tiktok.com'
+      },
+      images: {
+        logo: '',
+        hero: '',
+        about: ''
+      },
+      offers: [
+        {
+          badge: 'FIRST ORDER',
+          title: '10% OFF on your first order!',
+          subtitle: 'Mention code NUMNUM10 when placing your WhatsApp order.',
+          bg: 'bg-white'
+        },
+        {
+          badge: 'COMBO DEAL',
+          title: 'Save More with 8pcs & Combo Boxes',
+          subtitle: 'Enjoy up to Rs. 50 off per box when choosing 8-piece packs.',
+          bg: 'bg-choco-900 text-white'
+        },
+        {
+          badge: 'CAMPUS SPECIAL',
+          title: 'Free Wayamba Campus Delivery',
+          subtitle: 'Zero delivery fee for students & staff at Wayamba University.',
+          bg: 'bg-white'
+        }
+      ],
+      policies: {
+        terms: [
+          'All orders must be placed through our official WhatsApp account.',
+          'Customers must provide accurate order and delivery details.',
+          'Payments are accepted through bank deposits only.',
+          'Orders are confirmed after payment verification.',
+          'Product availability may change without prior notice.',
+          'Order changes or cancellations must be requested as early as possible.',
+          'Customers are responsible for providing correct contact and delivery information.'
+        ],
+        privacy: [
+          'Orders are handled through WhatsApp.',
+          'We request only necessary details such as name, address, contact numbers and order information.',
+          'Customer details are used only for order processing and delivery.',
+          'We do not maintain a separate customer database or sell customer information.',
+          'Order details may remain in WhatsApp chat history or backups.'
+        ],
+        delivery: [
+          'Orders are accepted through WhatsApp only.',
+          'Delivery availability depends on the customer\'s location.',
+          'Delivery charges may vary depending on the location.',
+          'Estimated delivery times will be communicated when confirming orders.',
+          'Customers must provide accurate delivery details.',
+          'Any damaged or incorrect products should be reported through WhatsApp as soon as possible.'
+        ]
+      }
+    };
+
+    /*************************************************************************
+     * 3. STATE MANAGEMENT & PERSISTENCE (LocalStorage + IndexedDB Safe)
+     *************************************************************************/
+    const STORAGE_KEYS = {
+      PRODUCTS: 'numnum_products_v1',
+      SETTINGS: 'numnum_settings_v1',
+      CART: 'numnum_cart_v1',
+      ADMIN_SESSION: 'numnum_admin_session_v1',
+      ACTIVITY: 'numnum_activity_v1'
+    };
+
+    let products = [];
+    let settings = {};
+    let cart = [];
+    let activeCategory = 'All Products';
+    let cardQuantities = {};
+    let activityLog = [];
+    let pendingProductImageBase64 = null;
+
+    function loadAppState() {
+      try {
+        const savedProducts = localStorage.getItem(STORAGE_KEYS.PRODUCTS);
+        products = savedProducts ? JSON.parse(savedProducts) : JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
+
+        const savedSettings = localStorage.getItem(STORAGE_KEYS.SETTINGS);
+        settings = savedSettings ? { ...DEFAULT_SETTINGS, ...JSON.parse(savedSettings) } : JSON.parse(JSON.stringify(DEFAULT_SETTINGS));
+
+        const savedCart = localStorage.getItem(STORAGE_KEYS.CART);
+        cart = savedCart ? JSON.parse(savedCart) : [];
+
+        const savedActivity = localStorage.getItem(STORAGE_KEYS.ACTIVITY);
+        activityLog = savedActivity ? JSON.parse(savedActivity) : [
+          { time: new Date().toLocaleTimeString(), text: 'Storefront initialized with 12 NumNum Bites products.' }
+        ];
+      } catch (err) {
+        console.error('State load error:', err);
+        products = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
+        settings = JSON.parse(JSON.stringify(DEFAULT_SETTINGS));
+        cart = [];
+      }
+    }
+
+    function persistProducts() {
+      try {
+        localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(products));
+      } catch (e) {
+        showToast('Storage quota warning: Image may be too large. Try a smaller image (< 800KB).', 'error');
+      }
+    }
+
+    function persistSettings() {
+      try {
+        localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(settings));
+      } catch (e) {
+        showToast('Storage quota warning: Image file is too large.', 'error');
+      }
+    }
+
+    function persistCart() {
+      localStorage.setItem(STORAGE_KEYS.CART, JSON.stringify(cart));
+    }
+
+    function logActivity(text) {
+      activityLog.unshift({ time: new Date().toLocaleTimeString(), text });
+      if (activityLog.length > 25) activityLog.pop();
+      localStorage.setItem(STORAGE_KEYS.ACTIVITY, JSON.stringify(activityLog));
+    }
+
+    /*************************************************************************
+     * 4. NAVIGATION & UI HELPERS
+     *************************************************************************/
+    function navigateTo(sectionId) {
+      document.querySelectorAll('.page-section').forEach(sec => sec.classList.add('hidden'));
+      const target = document.getElementById(`section-${sectionId}`);
+      if (target) {
+        target.classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      // Update active nav link styling
+      document.querySelectorAll('.nav-link').forEach(btn => {
+        if (btn.dataset.target === sectionId) {
+          btn.classList.add('text-choco-900', 'border-gold-500');
+          btn.classList.remove('text-choco-700', 'border-transparent');
+        } else {
+          btn.classList.remove('text-choco-900', 'border-gold-500');
+          btn.classList.add('text-choco-700', 'border-transparent');
+        }
+      });
+
+      if (sectionId === 'admin') {
+        renderAdminDashboard();
+      }
+    }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const icon = document.getElementById('mobile-menu-icon');
+      const isHidden = menu.classList.contains('hidden');
+      menu.classList.toggle('hidden');
+      icon.className = isHidden ? 'fa-solid fa-xmark text-lg' : 'fa-solid fa-bars text-lg';
+    }
+
+    function filterAndGoProducts(category) {
+      activeCategory = category;
+      navigateTo('products');
+      renderCategoryPills();
+      renderCatalogue();
+    }
+
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      const bgClass = type === 'error' ? 'bg-red-700 text-white' : 'bg-choco-900 text-cream-100 border border-gold-500/50';
+      toast.className = `${bgClass} px-4 py-3 rounded-2xl shadow-xl text-xs sm:text-sm font-semibold flex items-center gap-2.5 pointer-events-auto fade-in`;
+      toast.innerHTML = `
+        <i class="fa-solid ${type === 'error' ? 'fa-circle-exclamation text-red-200' : 'fa-circle-check text-gold-400'}"></i>
+        <span>${message}</span>
+      `;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 3200);
+    }
+
+    function formatLKR(amount) {
+      return 'Rs. ' + Number(amount).toLocaleString('en-LK');
+    }
+
+    function renderProductMedia(product) {
+      if (product.customImage) {
+        return `<img src="${product.customImage}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />`;
+      }
+      return getProductArtworkSVG(product.visualType, product.name);
+    }
+
+    /*************************************************************************
+     * 5. STOREFRONT RENDERING (Branding, Hero, Products, Offers, Policies)
+     *************************************************************************/
+    function renderAllStorefront() {
+      // Brand Logos
+      const logoHTML = settings.images.logo
+        ? `<img src="${settings.images.logo}" alt="NumNum Bites Logo" class="w-full h-full object-cover" />`
+        : getDefaultLogoSVG();
+
+      document.getElementById('nav-logo-container').innerHTML = logoHTML;
+      document.getElementById('footer-logo-container').innerHTML = logoHTML;
+
+      // Hero Copy & Artwork
+      document.getElementById('hero-heading').textContent = settings.heroHeading;
+      document.getElementById('hero-subheading').textContent = settings.heroSubheading;
+      document.getElementById('hero-slogan').textContent = settings.heroSlogan;
+
+      const heroWrapper = document.getElementById('hero-image-wrapper');
+      heroWrapper.innerHTML = settings.images.hero
+        ? `<img src="${settings.images.hero}" alt="NumNum Bites Healthy Snacks" class="w-full h-full object-cover" />`
+        : getDefaultHeroArtworkSVG();
+
+      // About Us Artwork
+      const aboutWrapper = document.getElementById('about-image-wrapper');
+      aboutWrapper.innerHTML = settings.images.about
+        ? `<img src="${settings.images.about}" alt="NumNum Bites Story" class="w-full h-full object-cover" />`
+        : getProductArtworkSVG('combo1-large', 'NumNum Bites');
+
+      // Category Thumbnails on Home
+      document.getElementById('cat-thumb-danut').innerHTML = getProductArtworkSVG('danut-4');
+      document.getElementById('cat-thumb-kurakkan').innerHTML = getProductArtworkSVG('kurakkan-4');
+      document.getElementById('cat-thumb-hakuru').innerHTML = getProductArtworkSVG('hakuru-4');
+      document.getElementById('cat-thumb-chikki').innerHTML = getProductArtworkSVG('chikki-4');
+      document.getElementById('cat-thumb-combo').innerHTML = getProductArtworkSVG('combo1-large');
+
+      // Popular Snacks Grid
+      const popularGrid = document.getElementById('popular-products-grid');
+      const popularItems = products.filter(p => p.popular).slice(0, 4);
+      popularGrid.innerHTML = popularItems.map(p => createProductCardHTML(p)).join('');
+
+      // Special Offers Grid
+      const offersGrid = document.getElementById('special-offers-grid');
+      offersGrid.innerHTML = settings.offers.map((offer, idx) => {
+        const isDark = idx === 1;
+        return `
+          <div class="${isDark ? 'bg-choco-900 text-cream-100 border-choco-800' : 'bg-white text-choco-900 border-beige-200'} p-7 rounded-3xl shadow-soft border flex flex-col justify-between">
+            <div>
+              <span class="inline-block px-3 py-1 rounded-full ${isDark ? 'bg-gold-500 text-choco-900' : 'bg-beige-100 text-choco-800'} text-[11px] font-bold uppercase tracking-wider mb-3">${offer.badge}</span>
+              <h3 class="font-brand text-2xl font-bold ${isDark ? 'text-white' : 'text-choco-900'}">${offer.title}</h3>
+              <p class="text-sm ${isDark ? 'text-beige-200' : 'text-choco-700'} mt-2">${offer.subtitle}</p>
+            </div>
+            <button onclick="navigateTo('products')" class="mt-6 w-fit px-5 py-2.5 rounded-full ${isDark ? 'bg-gold-500 text-choco-900 hover:bg-gold-400' : 'bg-choco-900 text-cream-100 hover:bg-choco-800'} text-xs font-bold transition-colors">
+              Shop Offer <i class="fa-solid fa-arrow-right ml-1"></i>
+            </button>
+          </div>
+        `;
+      }).join('');
+
+      // Catalogue
+      renderCategoryPills();
+      renderCatalogue();
+
+      // Policies
+      renderPolicies();
+
+      // Contact & Socials
+      renderContactAndSocials();
+
+      // Cart Badge
+      updateCartUI();
+    }
+
+    function createProductCardHTML(product) {
+      const qty = cardQuantities[product.id] || 1;
+      const waMsg = encodeURIComponent(`Hello NumNum Bites! I would like to order:\n• ${product.name} x ${qty} (${formatLKR(product.price * qty)})`);
+      const waLink = `https://wa.me/${settings.whatsappNumber}?text=${waMsg}`;
+
+      return `
+        <div class="bg-white rounded-3xl shadow-soft hover:shadow-card border border-beige-200 overflow-hidden flex flex-col justify-between group transition-all duration-300">
+          <div>
+            <!-- Product Image (Click to view details) -->
+            <div onclick="openProductDetailModal('${product.id}')" class="relative aspect-[16/13] bg-beige-100 overflow-hidden cursor-pointer">
+              ${renderProductMedia(product)}
+              <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-[11px] font-bold shadow-sm ${product.available ? 'bg-leaf-600 text-white' : 'bg-red-600 text-white'}">
+                ${product.available ? 'In Stock' : 'Out of Stock'}
+              </span>
+              <span class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-white/90 text-choco-900 text-[10px] font-bold shadow-sm">
+                ${product.category}
+              </span>
+            </div>
+
+            <!-- Info -->
+            <div class="p-5 pb-3">
+              <div class="flex items-start justify-between gap-2">
+                <h3 onclick="openProductDetailModal('${product.id}')" class="font-brand text-lg font-bold text-choco-900 hover:text-gold-600 cursor-pointer leading-snug">
+                  ${product.name}
+                </h3>
+              </div>
+              <div class="font-brand text-xl font-bold text-choco-800 mt-1">${formatLKR(product.price)}</div>
+              <p class="text-xs text-choco-600 mt-2 line-clamp-2 leading-relaxed">${product.description}</p>
+            </div>
+          </div>
+
+          <!-- Controls -->
+          <div class="p-5 pt-2 space-y-2.5">
+            <!-- Quantity Selector -->
+            <div class="flex items-center justify-between bg-cream-100 px-3 py-1.5 rounded-2xl border border-beige-200">
+              <span class="text-xs font-bold text-choco-700">Quantity:</span>
+              <div class="flex items-center gap-2.5">
+                <button onclick="changeCardQty('${product.id}', -1)" class="w-7 h-7 rounded-full bg-white hover:bg-beige-200 text-choco-900 font-bold text-sm border border-beige-200 flex items-center justify-center">-</button>
+                <span id="qty-val-${product.id}" class="font-bold text-sm text-choco-900 w-5 text-center">${qty}</span>
+                <button onclick="changeCardQty('${product.id}', 1)" class="w-7 h-7 rounded-full bg-white hover:bg-beige-200 text-choco-900 font-bold text-sm border border-beige-200 flex items-center justify-center">+</button>
+              </div>
+            </div>
+
+            <!-- Add to Cart & WhatsApp Order -->
+            <div class="grid grid-cols-2 gap-2">
+              <button onclick="addToCart('${product.id}')" ${!product.available ? 'disabled' : ''}
+                      class="py-2.5 px-3 rounded-xl ${product.available ? 'bg-choco-900 hover:bg-choco-800 text-cream-100' : 'bg-gray-300 text-gray-500 cursor-not-allowed'} font-bold text-xs flex items-center justify-center gap-1.5 transition-colors">
+                <i class="fa-solid fa-cart-plus"></i>
+                <span>Add to Cart</span>
+              </button>
+
+              <a id="wa-card-link-${product.id}" href="${waLink}" target="_blank" rel="noopener"
+                 class="py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#1fb858] text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-colors">
+                <i class="fa-brands fa-whatsapp text-sm"></i>
+                <span>WhatsApp</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function changeCardQty(productId, delta) {
+      const current = cardQuantities[productId] || 1;
+      const next = Math.max(1, current + delta);
+      cardQuantities[productId] = next;
+
+      const qtyEl = document.getElementById(`qty-val-${productId}`);
+      if (qtyEl) qtyEl.textContent = next;
+
+      // Update direct WhatsApp link dynamically
+      const product = products.find(p => p.id === productId);
+      const linkEl = document.getElementById(`wa-card-link-${productId}`);
+      if (product && linkEl) {
+        const waMsg = encodeURIComponent(`Hello NumNum Bites! I would like to order:\n• ${product.name} x ${next} (${formatLKR(product.price * next)})`);
+        linkEl.href = `https://wa.me/${settings.whatsappNumber}?text=${waMsg}`;
+      }
+    }
+
+    function renderCategoryPills() {
+      const categories = ['All Products', ...new Set(products.map(p => p.category))];
+      const container = document.getElementById('category-filters');
+      container.innerHTML = categories.map(cat => {
+        const isActive = activeCategory === cat;
+        return `
+          <button onclick="selectCategory('${cat}')"
+                  class="px-4 py-2 rounded-full text-xs font-bold transition-all ${isActive ? 'bg-choco-900 text-cream-100 shadow-sm' : 'bg-cream-100 text-choco-800 hover:bg-beige-200 border border-beige-200'}">
+            ${cat}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectCategory(cat) {
+      activeCategory = cat;
+      renderCategoryPills();
+      renderCatalogue();
+    }
+
+    function resetFilters() {
+      activeCategory = 'All Products';
+      document.getElementById('product-search').value = '';
+      document.getElementById('product-sort').value = 'default';
+      renderCategoryPills();
+      renderCatalogue();
+    }
+
+    function renderCatalogue() {
+      const searchQuery = (document.getElementById('product-search')?.value || '').toLowerCase().trim();
+      const sortBy = document.getElementById('product-sort')?.value || 'default';
+
+      let filtered = products.filter(p => {
+        const matchesCat = activeCategory === 'All Products' || p.category === activeCategory;
+        const matchesSearch = !searchQuery ||
+          p.name.toLowerCase().includes(searchQuery) ||
+          p.description.toLowerCase().includes(searchQuery) ||
+          p.category.toLowerCase().includes(searchQuery);
+        return matchesCat && matchesSearch;
+      });
+
+      if (sortBy === 'price-asc') {
+        filtered.sort((a, b) => a.price - b.price);
+      } else if (sortBy === 'price-desc') {
+        filtered.sort((a, b) => b.price - a.price);
+      } else if (sortBy === 'name-asc') {
+        filtered.sort((a, b) => a.name.localeCompare(b.name));
+      }
+
+      const grid = document.getElementById('catalogue-grid');
+      const emptyState = document.getElementById('catalogue-empty');
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        emptyState.classList.remove('hidden');
+      } else {
+        emptyState.classList.add('hidden');
+        grid.innerHTML = filtered.map(p => createProductCardHTML(p)).join('');
+      }
+    }
+
+    function openProductDetailModal(productId) {
+      const p = products.find(item => item.id === productId);
+      if (!p) return;
+      const qty = cardQuantities[p.id] || 1;
+      const waMsg = encodeURIComponent(`Hello NumNum Bites! I would like to order:\n• ${p.name} x ${qty} (${formatLKR(p.price * qty)})`);
+
+      const modal = document.getElementById('product-detail-modal');
+      const content = document.getElementById('product-detail-content');
+
+      content.innerHTML = `
+        <button onclick="closeProductDetailModal()" class="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-white/90 text-choco-900 shadow flex items-center justify-center hover:bg-beige-100">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="grid grid-cols-1 md:grid-cols-2">
+          <div class="bg-beige-100 aspect-square md:aspect-auto flex items-center justify-center overflow-hidden">
+            ${renderProductMedia(p)}
+          </div>
+          <div class="p-6 sm:p-8 flex flex-col justify-between space-y-5">
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <span class="px-3 py-1 rounded-full bg-beige-100 text-choco-800 text-xs font-bold">${p.category}</span>
+                <span class="px-3 py-1 rounded-full text-xs font-bold ${p.available ? 'bg-leaf-600/15 text-leaf-700' : 'bg-red-100 text-red-700'}">
+                  ${p.available ? '● Available' : '● Out of Stock'}
+                </span>
+              </div>
+              <h2 class="font-brand text-2xl sm:text-3xl font-bold text-choco-900">${p.name}</h2>
+              <div class="font-brand text-2xl font-bold text-gold-600 mt-2">${formatLKR(p.price)}</div>
+              <p class="text-sm text-choco-700 mt-4 leading-relaxed">${p.description}</p>
+              <div class="mt-4 p-3.5 rounded-2xl bg-cream-100 border border-beige-200 text-xs text-choco-700 space-y-1">
+                <div>✓ 100% Natural Ingredients (No Added Sugar)</div>
+                <div>✓ Zero Artificial Preservatives</div>
+                <div>✓ Packed Fresh in Eco-Friendly Kraft Box</div>
+              </div>
+            </div>
+
+            <div class="space-y-3 pt-2">
+              <button onclick="addToCart('${p.id}'); closeProductDetailModal();" ${!p.available ? 'disabled' : ''}
+                      class="w-full py-3.5 rounded-full bg-choco-900 hover:bg-choco-800 text-cream-100 font-bold text-sm shadow">
+                <i class="fa-solid fa-basket-shopping mr-2"></i> Add to Basket (${formatLKR(p.price)})
+              </button>
+              <a href="https://wa.me/${settings.whatsappNumber}?text=${waMsg}" target="_blank" rel="noopener"
+                 class="w-full py-3 rounded-full bg-[#25D366] hover:bg-[#1fb858] text-white font-bold text-sm flex items-center justify-center gap-2">
+                <i class="fa-brands fa-whatsapp text-lg"></i> Order Directly via WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      `;
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeProductDetailModal() {
+      const modal = document.getElementById('product-detail-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function renderPolicies() {
+      const renderList = (items) => items.map(item => `
+        <li class="flex items-start gap-2">
+          <i class="fa-solid fa-circle-check text-leaf-600 mt-1 text-xs shrink-0"></i>
+          <span>${item}</span>
+        </li>
+      `).join('');
+
+      document.getElementById('policy-terms-list').innerHTML = renderList(settings.policies.terms);
+      document.getElementById('policy-privacy-list').innerHTML = renderList(settings.policies.privacy);
+      document.getElementById('policy-delivery-list').innerHTML = renderList(settings.policies.delivery);
+    }
+
+    function openPolicyModal(type) {
+      const titles = {
+        terms: 'Terms & Conditions',
+        privacy: 'Privacy Policy',
+        delivery: 'Delivery Policy'
+      };
+      document.getElementById('policy-modal-title').textContent = titles[type];
+      const items = settings.policies[type] || [];
+      document.getElementById('policy-modal-list').innerHTML = items.map(item => `
+        <li class="flex items-start gap-2.5">
+          <i class="fa-solid fa-check text-gold-600 mt-1"></i>
+          <span>${item}</span>
+        </li>
+      `).join('');
+      const modal = document.getElementById('policy-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closePolicyModal() {
+      const modal = document.getElementById('policy-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function renderContactAndSocials() {
+      document.getElementById('contact-phone-display').textContent = settings.displayPhone;
+      document.getElementById('contact-email-display').textContent = settings.email;
+      document.getElementById('contact-call-btn').href = `tel:+${settings.whatsappNumber}`;
+      document.getElementById('contact-mail-btn').href = `mailto:${settings.email}`;
+      document.getElementById('contact-wa-btn').href = `https://wa.me/${settings.whatsappNumber}`;
+      document.getElementById('nav-whatsapp-btn').href = `https://wa.me/${settings.whatsappNumber}?text=${encodeURIComponent('Hello NumNum Bites! I would like to place an order.')}`;
+      document.getElementById('hero-whatsapp-btn').href = `https://wa.me/${settings.whatsappNumber}?text=${encodeURIComponent('Hello NumNum Bites! I would like to place an order.')}`;
+
+      document.getElementById('footer-phone').textContent = settings.displayPhone;
+      document.getElementById('footer-phone').href = `https://wa.me/${settings.whatsappNumber}`;
+      document.getElementById('footer-email').textContent = settings.email;
+      document.getElementById('footer-email').href = `mailto:${settings.email}`;
+
+      const socialPlatforms = [
+        { name: 'Instagram', icon: 'fa-brands fa-instagram', url: settings.socials.instagram },
+        { name: 'Facebook', icon: 'fa-brands fa-facebook-f', url: settings.socials.facebook },
+        { name: 'YouTube', icon: 'fa-brands fa-youtube', url: settings.socials.youtube },
+        { name: 'TikTok', icon: 'fa-brands fa-tiktok', url: settings.socials.tiktok }
+      ];
+
+      document.getElementById('contact-socials-grid').innerHTML = socialPlatforms.map(s => `
+        <a href="${s.url}" target="_blank" rel="noopener"
+           class="flex items-center gap-2.5 p-3 rounded-2xl bg-choco-800 hover:bg-gold-500 hover:text-choco-900 text-cream-100 text-xs font-bold transition-colors">
+          <i class="${s.icon} text-base"></i>
+          <span>${s.name} – NumNum Bites</span>
+        </a>
+      `).join('');
+
+      document.getElementById('footer-social-icons').innerHTML = socialPlatforms.map(s => `
+        <a href="${s.url}" target="_blank" rel="noopener" aria-label="${s.name}"
+           class="w-9 h-9 rounded-full bg-choco-900 hover:bg-gold-500 hover:text-choco-900 text-cream-100 flex items-center justify-center transition-colors border border-choco-800">
+          <i class="${s.icon} text-sm"></i>
+        </a>
+      `).join('');
+    }
+
+    /*************************************************************************
+     * 6. SHOPPING CART & WHATSAPP CHECKOUT
+     *************************************************************************/
+    function toggleCart(open) {
+      const drawer = document.getElementById('cart-drawer');
+      if (open) {
+        drawer.classList.remove('hidden');
+        updateCartUI();
+      } else {
+        drawer.classList.add('hidden');
+      }
+    }
+
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      if (!product || !product.available) return;
+
+      const qtyToAdd = cardQuantities[productId] || 1;
+      const existing = cart.find(item => item.productId === productId);
+
+      if (existing) {
+        existing.qty += qtyToAdd;
+      } else {
+        cart.push({ productId, qty: qtyToAdd });
+      }
+
+      persistCart();
+      updateCartUI();
+      showToast(`Added ${qtyToAdd} × ${product.name} to basket!`);
+    }
+
+    function updateCartItemQty(productId, delta) {
+      const index = cart.findIndex(item => item.productId === productId);
+      if (index === -1) return;
+
+      cart[index].qty += delta;
+      if (cart[index].qty <= 0) {
+        cart.splice(index, 1);
+      }
+      persistCart();
+      updateCartUI();
+    }
+
+    function removeCartItem(productId) {
+      cart = cart.filter(item => item.productId !== productId);
+      persistCart();
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+      document.getElementById('cart-badge').textContent = totalItems;
+
+      const container = document.getElementById('cart-items-container');
+      let subtotal = 0;
+
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-16 px-4">
+            <div class="w-16 h-16 rounded-full bg-beige-100 text-choco-600 flex items-center justify-center text-2xl mx-auto mb-3">
+              <i class="fa-solid fa-basket-shopping"></i>
+            </div>
+            <h3 class="font-brand text-lg font-bold text-choco-900">Your basket is empty</h3>
+            <p class="text-xs text-choco-600 mt-1">Add some healthy Danut balls, Kurakkan Laddu, or Combo Boxes!</p>
+          </div>
+        `;
+      } else {
+        container.innerHTML = cart.map(item => {
+          const product = products.find(p => p.id === item.productId);
+          if (!product) return '';
+          const lineTotal = product.price * item.qty;
+          subtotal += lineTotal;
+
+          return `
+            <div class="bg-white p-3.5 rounded-2xl border border-beige-200 shadow-xs flex items-center gap-3">
+              <div class="w-16 h-16 rounded-xl bg-beige-100 overflow-hidden shrink-0">
+                ${renderProductMedia(product)}
+              </div>
+              <div class="flex-grow min-w-0">
+                <h4 class="font-brand font-bold text-sm text-choco-900 truncate">${product.name}</h4>
+                <div class="text-xs text-choco-600">${formatLKR(product.price)} each</div>
+                <div class="flex items-center justify-between mt-2">
+                  <div class="flex items-center gap-2 bg-cream-100 px-2 py-0.5 rounded-lg border border-beige-200">
+                    <button onclick="updateCartItemQty('${product.id}', -1)" class="text-xs font-bold px-1.5 text-choco-900">-</button>
+                    <span class="text-xs font-bold text-choco-900">${item.qty}</span>
+                    <button onclick="updateCartItemQty('${product.id}', 1)" class="text-xs font-bold px-1.5 text-choco-900">+</button>
+                  </div>
+                  <span class="font-bold text-sm text-choco-900">${formatLKR(lineTotal)}</span>
+                </div>
+              </div>
+              <button onclick="removeCartItem('${product.id}')" aria-label="Remove item" class="text-choco-400 hover:text-red-600 p-1.5">
+                <i class="fa-solid fa-trash-can text-xs"></i>
+              </button>
+            </div>
+          `;
+        }).join('');
+      }
+
+      document.getElementById('cart-subtotal').textContent = formatLKR(subtotal);
+      document.getElementById('cart-total').textContent = formatLKR(subtotal);
+    }
+
+    function checkoutViaWhatsApp() {
+      if (cart.length === 0) {
+        showToast('Your basket is empty. Add products before checking out!', 'error');
+        return;
+      }
+
+      let totalAmount = 0;
+      const lines = [
+        'Hello *NumNum Bites*! 🌿',
+        'I would like to place the following order:',
+        ''
+      ];
+
+      cart.forEach((item, index) => {
+        const p = products.find(prod => prod.id === item.productId);
+        if (p) {
+          const itemTotal = p.price * item.qty;
+          totalAmount += itemTotal;
+          lines.push(`${index + 1}. *${p.name}*`);
+          lines.push(`   Qty: ${item.qty} × ${formatLKR(p.price)} = *${formatLKR(itemTotal)}*`);
+        }
+      });
+
+      lines.push('');
+      lines.push(`*Total Order Amount: ${formatLKR(totalAmount)}*`);
+      lines.push('');
+      lines.push('Please share bank deposit details & delivery charges. Thank you!');
+
+      const encodedMessage = encodeURIComponent(lines.join('\n'));
+      const whatsappURL = `https://wa.me/${settings.whatsappNumber}?text=${encodedMessage}`;
+      window.open(whatsappURL, '_blank', 'noopener');
+    }
+
+    /*************************************************************************
+     * 7. CONTACT FORM HANDLERS
+     *************************************************************************/
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('contact-name').value.trim();
+      showToast(`Thank you, ${name}! Your message has been received.`);
+      e.target.reset();
+    }
+
+    function sendContactViaWhatsApp() {
+      const name = document.getElementById('contact-name').value.trim() || 'Customer';
+      const phone = document.getElementById('contact-phone').value.trim();
+      const msg = document.getElementById('contact-message').value.trim() || 'Hello NumNum Bites, I have a question.';
+      const fullText = `Hello NumNum Bites!\nName: ${name}\n${phone ? 'Phone: ' + phone + '\n' : ''}Message: ${msg}`;
+      window.open(`https://wa.me/${settings.whatsappNumber}?text=${encodeURIComponent(fullText)}`, '_blank', 'noopener');
+    }
+
+    /*************************************************************************
+     * 8. ADMIN AUTHENTICATION & DASHBOARD MANAGEMENT
+     *************************************************************************/
+    function isAdminAuthenticated() {
+      return sessionStorage.getItem(STORAGE_KEYS.ADMIN_SESSION) === 'authenticated';
+    }
+
+    function openAdminModal() {
+      if (isAdminAuthenticated()) {
+        navigateTo('admin');
+        return;
+      }
+      const modal = document.getElementById('admin-login-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeAdminModal() {
+      const modal = document.getElementById('admin-login-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function handleAdminLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('admin-login-email').value.trim();
+      const pass = document.getElementById('admin-login-pass').value;
+
+      if (!email || pass.length < 6) {
+        showToast('Please enter a valid admin email and at least 6 characters.', 'error');
+        return;
+      }
+
+      sessionStorage.setItem(STORAGE_KEYS.ADMIN_SESSION, 'authenticated');
+      sessionStorage.setItem('numnum_admin_user', email);
+      logActivity(`Admin logged in (${email})`);
+      closeAdminModal();
+      navigateTo('admin');
+      showToast('Welcome to the NumNum Bites Admin Dashboard!');
+    }
+
+    function adminLogout() {
+      sessionStorage.removeItem(STORAGE_KEYS.ADMIN_SESSION);
+      navigateTo('home');
+      showToast('Logged out of Admin Dashboard.');
+    }
+
+    function switchAdminTab(tabName) {
+      document.querySelectorAll('.admin-tab-panel').forEach(panel => panel.classList.add('hidden'));
+      document.getElementById(`admin-tab-${tabName}`).classList.remove('hidden');
+
+      document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+        if (btn.dataset.tab === tabName) {
+          btn.classList.add('bg-choco-900', 'text-cream-100');
+          btn.classList.remove('text-choco-800', 'hover:bg-beige-100');
+        } else {
+          btn.classList.remove('bg-choco-900', 'text-cream-100');
+          btn.classList.add('text-choco-800', 'hover:bg-beige-100');
+        }
+      });
+    }
+
+    function renderAdminDashboard() {
+      if (!isAdminAuthenticated()) {
+        navigateTo('home');
+        openAdminModal();
+        return;
+      }
+
+      // Update Stats
+      document.getElementById('stat-total-products').textContent = products.length;
+      document.getElementById('stat-total-categories').textContent = new Set(products.map(p => p.category)).size;
+      document.getElementById('stat-available-products').textContent = products.filter(p => p.available).length;
+      const customImgCount = products.filter(p => p.customImage).length +
+        (settings.images.logo ? 1 : 0) +
+        (settings.images.hero ? 1 : 0) +
+        (settings.images.about ? 1 : 0);
+      document.getElementById('stat-custom-images').textContent = customImgCount;
+
+      // Render Admin Products List
+      const adminList = document.getElementById('admin-products-list');
+      adminList.innerHTML = products.map(p => `
+        <div class="bg-white rounded-3xl p-4 shadow-soft border border-beige-200 flex flex-col justify-between gap-4">
+          <div class="flex gap-4 items-center">
+            <div class="w-20 h-20 rounded-2xl bg-beige-100 overflow-hidden shrink-0 border border-beige-200">
+              ${renderProductMedia(p)}
+            </div>
+            <div class="min-w-0 flex-grow">
+              <span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-beige-100 text-choco-800">${p.category}</span>
+              <h3 class="font-brand font-bold text-base text-choco-900 truncate mt-1">${p.name}</h3>
+              <div class="font-bold text-sm text-gold-600">${formatLKR(p.price)}</div>
+              <span class="text-[11px] font-semibold ${p.available ? 'text-leaf-600' : 'text-red-600'}">
+                ${p.available ? '● In Stock' : '● Out of Stock'}
+              </span>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 pt-2 border-t border-beige-100">
+            <button onclick="openProductEditorModal('${p.id}')" class="flex-1 py-2 px-3 rounded-xl bg-choco-900 hover:bg-choco-800 text-cream-100 text-xs font-bold">
+              <i class="fa-solid fa-pen mr-1"></i> Edit / Photo
+            </button>
+            <button onclick="toggleProductAvailability('${p.id}')" class="py-2 px-3 rounded-xl bg-beige-100 hover:bg-beige-200 text-choco-900 text-xs font-bold" title="Toggle Stock">
+              <i class="fa-solid fa-rotate"></i>
+            </button>
+            <button onclick="deleteProduct('${p.id}')" class="py-2 px-3 rounded-xl bg-red-100 hover:bg-red-200 text-red-700 text-xs font-bold" title="Delete Product">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      `).join('');
+
+      // Render Image Manager Previews
+      document.getElementById('admin-preview-logo').innerHTML = settings.images.logo
+        ? `<img src="${settings.images.logo}" class="w-full h-full object-cover" />`
+        : getDefaultLogoSVG();
+
+      document.getElementById('admin-preview-hero').innerHTML = settings.images.hero
+        ? `<img src="${settings.images.hero}" class="w-full h-full object-cover" />`
+        : getDefaultHeroArtworkSVG();
+
+      document.getElementById('admin-preview-about').innerHTML = settings.images.about
+        ? `<img src="${settings.images.about}" class="w-full h-full object-cover" />`
+        : getProductArtworkSVG('combo1-large');
+
+      // Populate Content Settings Form
+      document.getElementById('edit-hero-heading').value = settings.heroHeading;
+      document.getElementById('edit-hero-slogan').value = settings.heroSlogan;
+      document.getElementById('edit-hero-subheading').value = settings.heroSubheading;
+      document.getElementById('edit-whatsapp-num').value = settings.whatsappNumber;
+      document.getElementById('edit-business-email').value = settings.email;
+      document.getElementById('edit-social-instagram').value = settings.socials.instagram;
+      document.getElementById('edit-social-facebook').value = settings.socials.facebook;
+      document.getElementById('edit-social-youtube').value = settings.socials.youtube;
+      document.getElementById('edit-social-tiktok').value = settings.socials.tiktok;
+
+      document.getElementById('admin-offers-editor').innerHTML = settings.offers.map((offer, i) => `
+        <div class="p-4 rounded-2xl bg-cream-100 border border-beige-200 space-y-2">
+          <span class="text-[11px] font-bold uppercase text-gold-600">Offer Card ${i + 1}</span>
+          <input type="text" id="offer-badge-${i}" value="${offer.badge}" placeholder="Badge" class="w-full px-3 py-2 rounded-xl bg-white border border-beige-200 text-xs font-bold" />
+          <input type="text" id="offer-title-${i}" value="${offer.title}" placeholder="Offer Title" class="w-full px-3 py-2 rounded-xl bg-white border border-beige-200 text-xs" />
+          <textarea id="offer-sub-${i}" rows="2" placeholder="Subtitle" class="w-full px-3 py-2 rounded-xl bg-white border border-beige-200 text-xs">${offer.subtitle}</textarea>
+        </div>
+      `).join('');
+
+      // Render Activity Log
+      document.getElementById('admin-activity-log').innerHTML = activityLog.map(entry => `
+        <li class="p-2.5 rounded-xl bg-cream-100 border border-beige-200 flex justify-between gap-2">
+          <span>${entry.text}</span>
+          <span class="text-[10px] text-choco-500 shrink-0">${entry.time}</span>
+        </li>
+      `).join('');
+    }
+
+    // Compress & convert uploaded image to optimized Data URL for persistent storage
+    function compressImageFile(file, maxWidth = 900, callback) {
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          let width = img.width;
+          let height = img.height;
+          if (width > maxWidth) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          }
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+          const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.82);
+          callback(compressedDataUrl);
+        };
+        img.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function handleSiteImageUpload(event, targetKey) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      compressImageFile(file, targetKey === 'logo' ? 400 : 1200, (dataUrl) => {
+        settings.images[targetKey] = dataUrl;
+        persistSettings();
+        logActivity(`Updated website ${targetKey} image.`);
+        renderAllStorefront();
+        renderAdminDashboard();
+        showToast(`Website ${targetKey} image updated live!`);
+      });
+    }
+
+    function resetSiteImage(targetKey) {
+      settings.images[targetKey] = '';
+      persistSettings();
+      logActivity(`Restored default ${targetKey} artwork.`);
+      renderAllStorefront();
+      renderAdminDashboard();
+      showToast(`Default ${targetKey} artwork restored.`);
+    }
+
+    // Product Add / Edit Modal
+    function openProductEditorModal(productId = null) {
+      pendingProductImageBase64 = null;
+      const modal = document.getElementById('product-editor-modal');
+      const titleEl = document.getElementById('product-editor-title');
+
+      if (productId) {
+        const p = products.find(item => item.id === productId);
+        if (!p) return;
+        titleEl.textContent = 'Edit Product';
+        document.getElementById('prod-edit-id').value = p.id;
+        document.getElementById('prod-edit-name').value = p.name;
+        document.getElementById('prod-edit-price').value = p.price;
+        document.getElementById('prod-edit-category').value = p.category;
+        document.getElementById('prod-edit-available').value = String(p.available);
+        document.getElementById('prod-edit-desc').value = p.description;
+        document.getElementById('prod-edit-popular').checked = Boolean(p.popular);
+        pendingProductImageBase64 = p.customImage || '';
+        document.getElementById('prod-edit-img-preview').innerHTML = renderProductMedia(p);
+      } else {
+        titleEl.textContent = 'Add New Product';
+        document.getElementById('prod-edit-id').value = '';
+        document.getElementById('prod-edit-name').value = '';
+        document.getElementById('prod-edit-price').value = '';
+        document.getElementById('prod-edit-category').value = 'Danut';
+        document.getElementById('prod-edit-available').value = 'true';
+        document.getElementById('prod-edit-desc').value = '';
+        document.getElementById('prod-edit-popular').checked = false;
+        pendingProductImageBase64 = '';
+        document.getElementById('prod-edit-img-preview').innerHTML = getProductArtworkSVG('danut-4');
+      }
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeProductEditorModal() {
+      const modal = document.getElementById('product-editor-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function handleProductPhotoPreview(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      compressImageFile(file, 800, (dataUrl) => {
+        pendingProductImageBase64 = dataUrl;
+        document.getElementById('prod-edit-img-preview').innerHTML = `<img src="${dataUrl}" class="w-full h-full object-cover" />`;
+        showToast('Photo loaded! Click "Save Product" to publish.');
+      });
+    }
+
+    function clearProductUploadedPhoto() {
+      pendingProductImageBase64 = '';
+      document.getElementById('prod-edit-img-preview').innerHTML = getProductArtworkSVG('danut-4');
+      showToast('Switched to default kraft box artwork.');
+    }
+
+    function saveProductForm(e) {
+      e.preventDefault();
+      const id = document.getElementById('prod-edit-id').value;
+      const name = document.getElementById('prod-edit-name').value.trim();
+      const price = Number(document.getElementById('prod-edit-price').value);
+      const category = document.getElementById('prod-edit-category').value.trim();
+      const available = document.getElementById('prod-edit-available').value === 'true';
+      const description = document.getElementById('prod-edit-desc').value.trim();
+      const popular = document.getElementById('prod-edit-popular').checked;
+
+      if (id) {
+        const idx = products.findIndex(p => p.id === id);
+        if (idx !== -1) {
+          products[idx] = {
+            ...products[idx],
+            name,
+            price,
+            category,
+            available,
+            description,
+            popular,
+            customImage: pendingProductImageBase64 !== null ? pendingProductImageBase64 : products[idx].customImage
+          };
+          logActivity(`Updated product: ${name} (${formatLKR(price)})`);
+        }
+      } else {
+        const newProd = {
+          id: 'prod-' + Date.now(),
+          name,
+          price,
+          category,
+          available,
+          description,
+          popular,
+          visualType: category.toLowerCase().includes('combo') ? 'combo1-small' : 'danut-4',
+          customImage: pendingProductImageBase64 || ''
+        };
+        products.push(newProd);
+        logActivity(`Added new product: ${name} (${formatLKR(price)})`);
+      }
+
+      persistProducts();
+      closeProductEditorModal();
+      renderAllStorefront();
+      renderAdminDashboard();
+      showToast(`Saved "${name}" successfully!`);
+    }
+
+    function toggleProductAvailability(productId) {
+      const p = products.find(item => item.id === productId);
+      if (!p) return;
+      p.available = !p.available;
+      persistProducts();
+      logActivity(`Marked ${p.name} as ${p.available ? 'In Stock' : 'Out of Stock'}`);
+      renderAllStorefront();
+      renderAdminDashboard();
+      showToast(`${p.name} is now ${p.available ? 'In Stock' : 'Out of Stock'}.`);
+    }
+
+    function deleteProduct(productId) {
+      const p = products.find(item => item.id === productId);
+      if (!p) return;
+      products = products.filter(item => item.id !== productId);
+      persistProducts();
+      logActivity(`Deleted product: ${p.name}`);
+      renderAllStorefront();
+      renderAdminDashboard();
+      showToast(`Removed "${p.name}" from catalogue.`);
+    }
+
+    function saveSiteSettings(e) {
+      e.preventDefault();
+      settings.heroHeading = document.getElementById('edit-hero-heading').value.trim();
+      settings.heroSlogan = document.getElementById('edit-hero-slogan').value.trim();
+      settings.heroSubheading = document.getElementById('edit-hero-subheading').value.trim();
+      settings.whatsappNumber = document.getElementById('edit-whatsapp-num').value.replace(/\D/g, '') || '94782083633';
+      settings.email = document.getElementById('edit-business-email').value.trim();
+      settings.socials.instagram = document.getElementById('edit-social-instagram').value.trim();
+      settings.socials.facebook = document.getElementById('edit-social-facebook').value.trim();
+      settings.socials.youtube = document.getElementById('edit-social-youtube').value.trim();
+      settings.socials.tiktok = document.getElementById('edit-social-tiktok').value.trim();
+
+      settings.offers = settings.offers.map((offer, i) => ({
+        ...offer,
+        badge: document.getElementById(`offer-badge-${i}`).value.trim(),
+        title: document.getElementById(`offer-title-${i}`).value.trim(),
+        subtitle: document.getElementById(`offer-sub-${i}`).value.trim()
+      }));
+
+      persistSettings();
+      logActivity('Updated homepage headings, contact info & special offers.');
+      renderAllStorefront();
+      showToast('Site settings & offers saved live!');
+    }
+
+    function saveFirebaseConfig() {
+      const raw = document.getElementById('firebase-config-input').value.trim();
+      if (!raw) {
+        showToast('Please paste a valid Firebase JSON configuration object.', 'error');
+        return;
+      }
+      try {
+        const parsed = JSON.parse(raw);
+        if (!parsed.apiKey || !parsed.projectId) throw new Error('Missing keys');
+        localStorage.setItem('numnum_firebase_config', JSON.stringify(parsed));
+        logActivity(`Connected Firebase Project: ${parsed.projectId}`);
+        showToast(`Firebase project "${parsed.projectId}" configuration saved!`);
+      } catch (err) {
+        showToast('Invalid JSON format. Ensure apiKey and projectId are included.', 'error');
+      }
+    }
+
+    function resetAllDemoData() {
+      localStorage.removeItem(STORAGE_KEYS.PRODUCTS);
+      localStorage.removeItem(STORAGE_KEYS.SETTINGS);
+      localStorage.removeItem(STORAGE_KEYS.ACTIVITY);
+      loadAppState();
+      renderAllStorefront();
+      renderAdminDashboard();
+      showToast('All products and settings reset to original PDF defaults.');
+    }
+
+    /*************************************************************************
+     * 9. INITIALIZE APPLICATION ON WINDOW LOAD
+     *************************************************************************/
+    window.addEventListener('DOMContentLoaded', () => {
+      loadAppState();
+      renderAllStorefront();
+    });
+  </script>
+</body>
+</html>

@@ -2856,7 +2856,8 @@
         localStorage.setItem('numnum_firebase_config', JSON.stringify(parsed));
         logActivity(`Connected Firebase Project: ${parsed.projectId}`);
         showToast(`Firebase project "${parsed.projectId}" configuration saved!`);
-      } catch (err) {
+    syncStoreStateToFirestore();
+    } catch (err) {
         showToast('Invalid JSON format. Ensure apiKey and projectId are included.', 'error');
       }
     }

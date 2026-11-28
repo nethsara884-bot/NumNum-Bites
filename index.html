@@ -2870,13 +2870,138 @@
       renderAdminDashboard();
       showToast('All products and settings reset to original PDF defaults.');
     }
+function getSavedFirebaseConfig() {
+      try {
+        const raw = localStorage.getItem('numnum_firebase_config');
+        if (!raw) return null;
+        const cfg = JSON.parse(raw);
+        return (cfg && cfg.projectId) ? cfg : null;
+      } catch (e) {
+        return null;
+      }
+    }
 
+    function toFirestoreValue(val) {
+      if (val === null || val === undefined) return { nullValue: null };
+      if (typeof val === 'boolean') return { booleanValue: val };
+      if (typeof val === 'number') {
+        return Number.isInteger(val) ? { integerValue: String(val) } : { doubleValue: val };
+      }
+      if (typeof val === 'string') return { stringValue: val };
+      if (Array.isArray(val)) {
+        return { arrayValue: { values: val.map(toFirestoreValue) } };
+      }
+      if (typeof val === 'object') {
+        const fields = {};
+        Object.keys(val).forEach((k) => {
+          fields[k] = toFirestoreValue(val[k]);
+        });
+        return { mapValue: { fields } };
+      }
+      return { stringValue: String(val) };
+    }
+
+    function fromFirestoreValue(fsVal) {
+      if (!fsVal || typeof fsVal !== 'object') return null;
+      if ('stringValue' in fsVal) return fsVal.stringValue;
+      if ('booleanValue' in fsVal) return fsVal.booleanValue;
+      if ('integerValue' in fsVal) return Number(fsVal.integerValue);
+      if ('doubleValue' in fsVal) return Number(fsVal.doubleValue);
+      if ('nullValue' in fsVal) return null;
+      if ('arrayValue' in fsVal) {
+        const arr = (fsVal.arrayValue && fsVal.arrayValue.values) || [];
+        return arr.map(fromFirestoreValue);
+      }
+      if ('mapValue' in fsVal) {
+        const fields = (fsVal.mapValue && fsVal.mapValue.fields) || {};
+        const obj = {};
+        Object.keys(fields).forEach((k) => {
+          obj[k] = fromFirestoreValue(fields[k]);
+        });
+        return obj;
+      }
+      return null;
+    }
+
+    async function syncStoreStateToFirestore() {
+      const cfg = getSavedFirebaseConfig();
+      if (!cfg) return;
+
+      const url = `https://firestore.googleapis.com/v1/projects/${encodeURIComponent(cfg.projectId)}/databases/(default)/documents/numnum_store/main_state`;
+      const payload = {
+        fields: {
+          products: toFirestoreValue(typeof products !== 'undefined' ? products : []),
+          settings: toFirestoreValue(typeof settings !== 'undefined' ? settings : {}),
+          activityLog: toFirestoreValue(typeof activityLog !== 'undefined' ? activityLog : []),
+          updatedAt: { stringValue: new Date().toISOString() }
+        }
+      };
+
+      try {
+        const res = await fetch(url, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (!res.ok) {
+          console.warn('Firestore sync failed with status:', res.status);
+        }
+      } catch (err) {
+        console.warn('Firestore sync error:', err);
+      }
+    }
+
+    async function loadStoreStateFromFirestore() {
+      const cfg = getSavedFirebaseConfig();
+      if (!cfg) return false;
+
+      const url = `https://firestore.googleapis.com/v1/projects/${encodeURIComponent(cfg.projectId)}/databases/(default)/documents/numnum_store/main_state`;
+      try {
+        const res = await fetch(url);
+        if (!res.ok) return false;
+        const doc = await res.json();
+        if (!doc || !doc.fields) return false;
+
+        if (doc.fields.products && typeof products !== 'undefined') {
+          const remoteProducts = fromFirestoreValue(doc.fields.products);
+          if (Array.isArray(remoteProducts) && remoteProducts.length > 0) {
+            products = remoteProducts;
+            localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(products));
+          }
+        }
+        if (doc.fields.settings && typeof settings !== 'undefined') {
+          const remoteSettings = fromFirestoreValue(doc.fields.settings);
+          if (remoteSettings && typeof remoteSettings === 'object') {
+            settings = { ...settings, ...remoteSettings };
+            localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(settings));
+          }
+        }
+        if (doc.fields.activityLog && typeof activityLog !== 'undefined') {
+          const remoteActivity = fromFirestoreValue(doc.fields.activityLog);
+          if (Array.isArray(remoteActivity)) {
+            activityLog = remoteActivity;
+            localStorage.setItem(STORAGE_KEYS.ACTIVITY, JSON.stringify(activityLog));
+          }
+        }
+        return true;
+      } catch (err) {
+        console.warn('Firestore load error:', err);
+        return false;
+      }
+    }
     /*************************************************************************
      * 9. INITIALIZE APPLICATION ON WINDOW LOAD
      *************************************************************************/
-    window.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('DOMContentLoaded', async () => {
       loadAppState();
       renderAllStorefront();
+      const loadedFromCloud = await loadStoreStateFromFirestore();
+      if (loadedFromCloud) {
+        renderAllStorefront();
+        if (typeof renderAdminDashboard === 'function') {
+          renderAdminDashboard();
+        }
+      }
     });
   </script>
 </body>
